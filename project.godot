@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/http_client/http_request_client.gd"
 }, {
+"base": "HTTPRequest",
+"class": "JoinRoomRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/join_room_request.gd"
+}, {
 "base": "Node2D",
 "class": "Main",
 "language": "GDScript",
@@ -93,6 +98,7 @@ _global_script_class_icons={
 "EndTurnAction": "",
 "GetRoomRequest": "",
 "HttpRequestClient": "",
+"JoinRoomRequest": "",
 "Main": "",
 "Noble": "",
 "Player": "",
