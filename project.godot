@@ -1,0 +1,127 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "ApiMethods",
+"language": "GDScript",
+"path": "res://scripts/enums/api_methods.gd"
+}, {
+"base": "Node2D",
+"class": "Card",
+"language": "GDScript",
+"path": "res://scenes/card/Card.gd"
+}, {
+"base": "Reference",
+"class": "CardColor",
+"language": "GDScript",
+"path": "res://scripts/enums/card_color.gd"
+}, {
+"base": "Reference",
+"class": "CardDTO",
+"language": "GDScript",
+"path": "res://scripts/dto/card.gd"
+}, {
+"base": "HTTPRequest",
+"class": "CreateRoomRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/create_room_request.gd"
+}, {
+"base": "Reference",
+"class": "EndTurnAction",
+"language": "GDScript",
+"path": "res://scripts/enums/end_turn_action.gd"
+}, {
+"base": "HTTPRequest",
+"class": "GetRoomRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/get_room_request.gd"
+}, {
+"base": "Node",
+"class": "HttpRequestClient",
+"language": "GDScript",
+"path": "res://scripts/http_client/http_request_client.gd"
+}, {
+"base": "Node2D",
+"class": "Main",
+"language": "GDScript",
+"path": "res://scenes/main/main.gd"
+}, {
+"base": "Reference",
+"class": "Noble",
+"language": "GDScript",
+"path": "res://scripts/dto/noble.gd"
+}, {
+"base": "Reference",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scripts/dto/player.gd"
+}, {
+"base": "Reference",
+"class": "PlayerState",
+"language": "GDScript",
+"path": "res://scripts/dto/player_state.gd"
+}, {
+"base": "Reference",
+"class": "RoomDTO",
+"language": "GDScript",
+"path": "res://scripts/dto/room.gd"
+}, {
+"base": "Reference",
+"class": "Tier",
+"language": "GDScript",
+"path": "res://scripts/enums/tier.gd"
+}, {
+"base": "Reference",
+"class": "TokenColor",
+"language": "GDScript",
+"path": "res://scripts/enums/token_color.gd"
+} ]
+_global_script_class_icons={
+"ApiMethods": "",
+"Card": "",
+"CardColor": "",
+"CardDTO": "",
+"CreateRoomRequest": "",
+"EndTurnAction": "",
+"GetRoomRequest": "",
+"HttpRequestClient": "",
+"Main": "",
+"Noble": "",
+"Player": "",
+"PlayerState": "",
+"RoomDTO": "",
+"Tier": "",
+"TokenColor": ""
+}
+
+[application]
+
+config/name="GemRush"
+run/main_scene="res://scenes/main/Main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=320
+window/size/height=180
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+2d/snapping/use_gpu_pixel_snap=true
+environment/default_environment="res://default_env.tres"
