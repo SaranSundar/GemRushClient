@@ -1,0 +1,63 @@
+[gd_scene format=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="CreateRoom" type="Button" parent="."]
+margin_left = 96.0
+margin_top = 15.0
+margin_right = 190.0
+margin_bottom = 35.0
+text = "Create Room"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetRoom" type="Button" parent="."]
+margin_left = 96.0
+margin_top = 46.0
+margin_right = 190.0
+margin_bottom = 66.0
+text = "Get Room"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinRoom" type="Button" parent="."]
+margin_left = 96.0
+margin_top = 75.0
+margin_right = 190.0
+margin_bottom = 95.0
+text = "Join Room"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGame" type="Button" parent="."]
+margin_left = 97.0
+margin_top = 105.0
+margin_right = 190.0
+margin_bottom = 125.0
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetGameState" type="Button" parent="."]
+margin_left = 86.0
+margin_top = 130.0
+margin_right = 199.0
+margin_bottom = 150.0
+text = "Get Game State"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndTurn" type="Button" parent="."]
+margin_left = 109.0
+margin_top = 155.0
+margin_right = 172.0
+margin_bottom = 175.0
+text = "EndTurn"
+__meta__ = {
+"_edit_use_anchors_": false
+}

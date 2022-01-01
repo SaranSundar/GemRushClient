@@ -1,0 +1,141 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/menu/create_room_lobby.gd" type="Script" id=1]
+
+[node name="CreateRoomLobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 319.0
+margin_bottom = 178.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 21.0
+margin_top = 11.0
+margin_right = 83.0
+margin_bottom = 25.0
+text = "Room Id: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomIdInput" type="LineEdit" parent="Panel"]
+margin_left = 6.0
+margin_top = 30.0
+margin_right = 316.0
+margin_bottom = 58.0
+text = "77e3854e-988e-4518-821f-a1ed1a3bf38e"
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 9.0
+margin_top = 61.0
+margin_right = 98.0
+margin_bottom = 75.0
+text = "Players Joined"
+
+[node name="PlayersJoined" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 81.0
+margin_right = 50.0
+margin_bottom = 121.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayersJoined"]
+margin_right = 164.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Player Id: "
+
+[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer"]
+margin_left = 68.0
+margin_right = 164.0
+margin_bottom = 14.0
+text = "saranuid (Host)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayersJoined"]
+margin_top = 18.0
+margin_right = 164.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer2"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Player Id: "
+
+[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 140.0
+margin_bottom = 14.0
+text = "vishruthuid"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlayersJoined"]
+margin_top = 36.0
+margin_right = 164.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer3"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Player Id: "
+
+[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer3"]
+margin_left = 68.0
+margin_right = 133.0
+margin_bottom = 14.0
+text = "juhwanuid"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PlayersJoined"]
+margin_top = 54.0
+margin_right = 164.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer4"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Player Id: "
+
+[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer4"]
+margin_left = 68.0
+margin_right = 128.0
+margin_bottom = 14.0
+text = "rooshiuid"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PlayersJoined"]
+margin_top = 72.0
+margin_right = 164.0
+margin_bottom = 86.0
+
+[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer5"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "Player Id: "
+
+[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer5"]
+margin_left = 68.0
+margin_right = 120.0
+margin_bottom = 14.0
+text = "rahuluid"
+
+[node name="StartGame" type="Button" parent="."]
+margin_left = 213.0
+margin_top = 121.0
+margin_right = 307.0
+margin_bottom = 154.0
+text = "Start Game"
