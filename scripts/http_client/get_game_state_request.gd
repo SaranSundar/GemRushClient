@@ -1,9 +1,9 @@
-class_name GetRoomRequest extends HTTPRequest
+class_name GetGameStateRequest extends HTTPRequest
 
 const host_ip: String = "http://207.246.122.46"
 const port: String = "9378"
 
-signal room_created(room_dto)
+signal game_state_created(game_state_dto)
 
 
 func _ready():
@@ -20,10 +20,10 @@ func _on_request_completed(result, response_code, headers, body):
 	print(headers)
 	print(result)
 	print(response_code)
-	var room_dto = RoomDTO.new()
-	room_dto.init_from_json(json.result)
-	emit_signal("room_created", room_dto)
+	var game_state = GameState.new()
+	game_state.init_from_json(json.result)
+	emit_signal("game_state_created", game_state)
 
-func get_room(room_id):
-	var get_room_url = self.host_ip + ":" + self.port +  ApiMethods.GET_ROOM + "/" + room_id
-	make_get_request(get_room_url)
+func get_game_state(game_state_id):
+	var get_game_state_url = self.host_ip + ":" + self.port +  ApiMethods.GET_GAME_STATE + "/" + game_state_id
+	make_get_request(get_game_state_url)

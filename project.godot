@@ -35,9 +35,24 @@ _global_script_classes=[ {
 "path": "res://scripts/http_client/create_room_request.gd"
 }, {
 "base": "Reference",
+"class": "Deck",
+"language": "GDScript",
+"path": "res://scripts/dto/deck.gd"
+}, {
+"base": "Reference",
 "class": "EndTurnAction",
 "language": "GDScript",
 "path": "res://scripts/enums/end_turn_action.gd"
+}, {
+"base": "Reference",
+"class": "GameState",
+"language": "GDScript",
+"path": "res://scripts/dto/game_state.gd"
+}, {
+"base": "HTTPRequest",
+"class": "GetGameStateRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/get_game_state_request.gd"
 }, {
 "base": "HTTPRequest",
 "class": "GetRoomRequest",
@@ -79,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dto/room.gd"
 }, {
+"base": "HTTPRequest",
+"class": "StartGameRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/start_game_request.gd"
+}, {
 "base": "Reference",
 "class": "Tier",
 "language": "GDScript",
@@ -95,7 +115,10 @@ _global_script_class_icons={
 "CardColor": "",
 "CardDTO": "",
 "CreateRoomRequest": "",
+"Deck": "",
 "EndTurnAction": "",
+"GameState": "",
+"GetGameStateRequest": "",
 "GetRoomRequest": "",
 "HttpRequestClient": "",
 "JoinRoomRequest": "",
@@ -104,6 +127,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerState": "",
 "RoomDTO": "",
+"StartGameRequest": "",
 "Tier": "",
 "TokenColor": ""
 }

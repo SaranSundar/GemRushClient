@@ -7,7 +7,7 @@ script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="CreateRoom" type="Button" parent="CanvasLayer"]
 margin_left = 96.0
 margin_top = 15.0
 margin_right = 190.0
@@ -17,26 +17,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
+[node name="GetRoom" type="Button" parent="CanvasLayer"]
 margin_left = 96.0
-margin_top = 52.0
+margin_top = 46.0
 margin_right = 190.0
-margin_bottom = 72.0
+margin_bottom = 66.0
 text = "Get Room"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="CanvasLayer"]
+[node name="JoinRoom" type="Button" parent="CanvasLayer"]
 margin_left = 96.0
-margin_top = 91.0
+margin_top = 75.0
 margin_right = 190.0
-margin_bottom = 111.0
+margin_bottom = 95.0
 text = "Join Room"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button3" to="." method="_on_Button3_pressed"]
+[node name="StartGame" type="Button" parent="CanvasLayer"]
+margin_left = 97.0
+margin_top = 105.0
+margin_right = 190.0
+margin_bottom = 125.0
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetGameState" type="Button" parent="CanvasLayer"]
+margin_left = 87.0
+margin_top = 134.0
+margin_right = 200.0
+margin_bottom = 154.0
+text = "Get Game State"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CanvasLayer/CreateRoom" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GetRoom" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinRoom" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartGame" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="CanvasLayer/GetGameState" to="." method="_on_GetGameState_pressed"]

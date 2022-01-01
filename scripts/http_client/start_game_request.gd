@@ -1,9 +1,9 @@
-class_name JoinRoomRequest extends HTTPRequest
+class_name StartGameRequest extends HTTPRequest
 
 const host_ip: String = "http://207.246.122.46"
 const port: String = "9378"
 
-signal room_created(room_dto)
+signal game_state_created(game_state_dto)
 
 
 func _ready():
@@ -22,15 +22,16 @@ func _on_request_completed(result, response_code, headers, body):
 	print(headers)
 	print(result)
 	print(response_code)
-	var room_dto = RoomDTO.new()
-	room_dto.init_from_json(json.result)
-	emit_signal("room_created", room_dto)
+	var game_state = GameState.new()
+	game_state.init_from_json(json.result)
+	emit_signal("game_state_created", game_state)
 
-func join_room(player_id: String, name, password, room_id):
-	var join_room_url = self.host_ip + ":" + self.port + ApiMethods.JOIN_ROOM + "/" + room_id
+func start_game(room_id):
+	var start_game_url = self.host_ip + ":" + self.port + ApiMethods.START_GAME
 	var payload = {
-			"name": name,
-			"password": password,
-			"player_id": player_id
+			'room_id': room_id
 		}
-	make_post_request(join_room_url, payload, true)
+	print("Start game request url is")
+	print(start_game_url)
+	print(payload)
+	make_post_request(start_game_url, payload, true)

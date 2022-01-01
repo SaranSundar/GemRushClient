@@ -26,14 +26,14 @@ func _on_request_completed(result, response_code, headers, body):
 	room_dto.init_from_json(json.result)
 	emit_signal("room_created", room_dto)
 
-func create_room(host_player: Player):
-	var create_room_url = self.host_ip + ":" + self.port + "/" + ApiMethods.CREATE_ROOM
+func create_room(host_player_id: String):
+	var create_room_url = self.host_ip + ":" + self.port + ApiMethods.CREATE_ROOM
 	var payload = {
 				"name": "Simulation Testing Room",
 				"password": "computers-fight",
 				"min_players": 2,
 				"max_players": 4,
-				"creator_id": host_player.id,
+				"creator_id": host_player_id,
 				"score_to_win": 15
 			}
 	make_post_request(create_room_url, payload, true)
