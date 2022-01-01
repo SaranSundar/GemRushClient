@@ -1,8 +1,8 @@
 class_name EndTurnAction extends Reference
 
-const BuyingCard = 1
-const BuyingGoldToken = 2
-const Buying3DifferentTokens = 3
-const Buying2SameTokens = 4
-const BuyingLimitedTokens = 5
+const BuyingCard = 'BuyingCard'
+const BuyingGoldToken = 'BuyingGoldToken'
+const Buying3DifferentTokens = 'Buying3DifferentTokens'
+const Buying2SameTokens = 'Buying2SameTokens'
+const BuyingLimitedTokens = 'BuyingLimitedTokens'
 

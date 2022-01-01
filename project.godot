@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enums/end_turn_action.gd"
 }, {
+"base": "HTTPRequest",
+"class": "EndTurnRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/end_turn_request.gd"
+}, {
 "base": "Reference",
 "class": "GameState",
 "language": "GDScript",
@@ -117,6 +122,7 @@ _global_script_class_icons={
 "CreateRoomRequest": "",
 "Deck": "",
 "EndTurnAction": "",
+"EndTurnRequest": "",
 "GameState": "",
 "GetGameStateRequest": "",
 "GetRoomRequest": "",

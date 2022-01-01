@@ -5,6 +5,7 @@ var get_room_request: GetRoomRequest
 var join_room_request: JoinRoomRequest
 var start_game_request: StartGameRequest
 var get_game_state_request: GetGameStateRequest
+var end_turn_request: EndTurnRequest
 
 func _init():
 	create_room_request = CreateRoomRequest.new()
@@ -12,11 +13,13 @@ func _init():
 	join_room_request = JoinRoomRequest.new()
 	start_game_request = StartGameRequest.new()
 	get_game_state_request = GetGameStateRequest.new()
+	end_turn_request = EndTurnRequest.new()
 	add_child(create_room_request)
 	add_child(get_room_request)
 	add_child(join_room_request)
 	add_child(start_game_request)
 	add_child(get_game_state_request)
+	add_child(end_turn_request)
 
 func connect_room_created_to_room_received(main):
 	create_room_request.connect("room_created", main, "room_received")
@@ -26,4 +29,5 @@ func connect_room_created_to_room_received(main):
 func connect_game_state_created_to_game_state_received(main):
 	start_game_request.connect("game_state_created", main, "game_state_received")
 	get_game_state_request.connect("game_state_created", main, "game_state_received")
+	end_turn_request.connect("game_state_created", main, "game_state_received")
 

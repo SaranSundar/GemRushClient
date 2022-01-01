@@ -48,11 +48,21 @@ __meta__ = {
 }
 
 [node name="GetGameState" type="Button" parent="CanvasLayer"]
-margin_left = 87.0
-margin_top = 134.0
-margin_right = 200.0
-margin_bottom = 154.0
+margin_left = 86.0
+margin_top = 130.0
+margin_right = 199.0
+margin_bottom = 150.0
 text = "Get Game State"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndTurn" type="Button" parent="CanvasLayer"]
+margin_left = 109.0
+margin_top = 155.0
+margin_right = 172.0
+margin_bottom = 175.0
+text = "EndTurn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,3 +72,4 @@ __meta__ = {
 [connection signal="pressed" from="CanvasLayer/JoinRoom" to="." method="_on_Button3_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartGame" to="." method="_on_Button4_pressed"]
 [connection signal="pressed" from="CanvasLayer/GetGameState" to="." method="_on_GetGameState_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurn" to="." method="_on_EndTurn_pressed"]

@@ -45,6 +45,19 @@ func start_game():
 func get_game_state():
 	http_client.get_game_state_request.get_game_state(game_state.id)
 
+func end_turn():
+	var room_id = room.id
+	var player_id = host_player.id
+	var game_state_id = game_state.id
+	var end_turn_action = EndTurnAction.Buying3DifferentTokens
+	var noble: Noble = null
+	var card: Card = null
+	var reserved_card: Card = null
+	var tokens_returned: Array = []
+	var tokens_bought: Array = [TokenColor.BLACK, TokenColor.BLUE, TokenColor.GREEN]
+	http_client.end_turn_request.end_turn(room_id, player_id, game_state_id,
+	 end_turn_action, noble, card, reserved_card, tokens_returned, tokens_bought)
+
 
 func _on_Button_pressed():
 	create_room()
@@ -64,3 +77,7 @@ func _on_Button4_pressed():
 
 func _on_GetGameState_pressed():
 	get_game_state()
+
+
+func _on_EndTurn_pressed():
+	end_turn()
