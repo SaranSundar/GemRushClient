@@ -139,3 +139,8 @@ margin_top = 121.0
 margin_right = 307.0
 margin_bottom = 154.0
 text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]

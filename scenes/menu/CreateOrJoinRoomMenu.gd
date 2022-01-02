@@ -13,14 +13,14 @@ func init(player: Player, menu_handler_in):
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_room_created_to_room_received(self)
-	http_client.connect_game_state_created_to_game_state_received(self)
+	# http_client.connect_game_state_created_to_game_state_received(self)
 
 func room_received(room_dto):
 	print("Room received")
 	print(room_dto)
 	room = room_dto
 	var create_room_lobby = CreateRoomLobbyScene.instance()
-	create_room_lobby.init(room)
+	create_room_lobby.init(room, host_player)
 	menu_handler.load_menu(create_room_lobby, self)
 
 func create_room():

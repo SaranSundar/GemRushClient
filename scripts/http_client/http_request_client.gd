@@ -8,6 +8,7 @@ var get_game_state_request: GetGameStateRequest
 var end_turn_request: EndTurnRequest
 
 func _init():
+	set_name("HttpRequestClient")
 	create_room_request = CreateRoomRequest.new()
 	get_room_request = GetRoomRequest.new()
 	join_room_request = JoinRoomRequest.new()
