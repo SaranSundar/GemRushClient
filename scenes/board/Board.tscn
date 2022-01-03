@@ -1,0 +1,538 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
+[ext_resource path="res://assets/card/gold_tokens.png" type="Texture" id=3]
+[ext_resource path="res://assets/card/blue_tokens.png" type="Texture" id=4]
+[ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
+[ext_resource path="res://assets/card/green_tokens.png" type="Texture" id=6]
+[ext_resource path="res://assets/card/white_tokens.png" type="Texture" id=7]
+[ext_resource path="res://assets/card/red_tokens.png" type="Texture" id=8]
+[ext_resource path="res://assets/card/white_card.png" type="Texture" id=9]
+[ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
+[ext_resource path="res://assets/card/big_10.png" type="Texture" id=11]
+[ext_resource path="res://assets/card/small_6.png" type="Texture" id=12]
+[ext_resource path="res://assets/card/small_5.png" type="Texture" id=13]
+[ext_resource path="res://assets/card/green_card.png" type="Texture" id=14]
+[ext_resource path="res://assets/card/red_card.png" type="Texture" id=15]
+[ext_resource path="res://assets/card/small_10.png" type="Texture" id=16]
+[ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
+[ext_resource path="res://assets/card/big_2.png" type="Texture" id=18]
+[ext_resource path="res://assets/card/big_4.png" type="Texture" id=19]
+[ext_resource path="res://assets/card/big_3.png" type="Texture" id=20]
+[ext_resource path="res://assets/card/small_1.png" type="Texture" id=21]
+[ext_resource path="res://assets/card/blue_card.png" type="Texture" id=22]
+[ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
+[ext_resource path="res://assets/card/small_8.png" type="Texture" id=24]
+[ext_resource path="res://assets/card/small_4.png" type="Texture" id=25]
+[ext_resource path="res://assets/card/black_gem.png" type="Texture" id=26]
+[ext_resource path="res://assets/card/big_1.png" type="Texture" id=27]
+[ext_resource path="res://assets/card/gold_gem.png" type="Texture" id=28]
+[ext_resource path="res://assets/card/white_gem.png" type="Texture" id=29]
+[ext_resource path="res://assets/card/green_gem.png" type="Texture" id=30]
+[ext_resource path="res://assets/card/red_gem.png" type="Texture" id=31]
+[ext_resource path="res://assets/card/blue_gem.png" type="Texture" id=32]
+[ext_resource path="res://assets/card/small_2.png" type="Texture" id=33]
+[ext_resource path="res://assets/card/border.png" type="Texture" id=34]
+[ext_resource path="res://scenes/noble/Noble.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/card/cancel.png" type="Texture" id=36]
+[ext_resource path="res://assets/card/selection.jpeg" type="Texture" id=37]
+
+[node name="Board" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Bank" type="Node2D" parent="."]
+position = Vector2( 96, 7 )
+
+[node name="GoldTokens" type="Sprite" parent="Bank"]
+position = Vector2( 303, 16 )
+texture = ExtResource( 3 )
+
+[node name="Small3" type="Sprite" parent="Bank/GoldTokens"]
+position = Vector2( -23, 8 )
+texture = ExtResource( 10 )
+
+[node name="BlackTokens" type="Sprite" parent="Bank"]
+position = Vector2( 303, 46 )
+texture = ExtResource( 5 )
+
+[node name="Small6" type="Sprite" parent="Bank/BlackTokens"]
+position = Vector2( -22, 5 )
+texture = ExtResource( 12 )
+
+[node name="RedTokens" type="Sprite" parent="Bank"]
+position = Vector2( 303, 76 )
+texture = ExtResource( 8 )
+
+[node name="Small10" type="Sprite" parent="Bank/RedTokens"]
+position = Vector2( -22, 7 )
+texture = ExtResource( 16 )
+
+[node name="GreenTokens" type="Sprite" parent="Bank"]
+position = Vector2( 302, 106 )
+texture = ExtResource( 6 )
+
+[node name="Small4" type="Sprite" parent="Bank/GreenTokens"]
+position = Vector2( -22, 5 )
+texture = ExtResource( 25 )
+
+[node name="BlueTokens" type="Sprite" parent="Bank"]
+position = Vector2( 303, 133 )
+texture = ExtResource( 4 )
+
+[node name="Small1" type="Sprite" parent="Bank/BlueTokens"]
+position = Vector2( -23, 5 )
+texture = ExtResource( 21 )
+
+[node name="WhiteTokens" type="Sprite" parent="Bank"]
+position = Vector2( 302, 163 )
+texture = ExtResource( 7 )
+
+[node name="Small8" type="Sprite" parent="Bank/WhiteTokens"]
+position = Vector2( -22, 7 )
+texture = ExtResource( 24 )
+
+[node name="PlayerTokens" type="Node2D" parent="."]
+position = Vector2( 76, 53 )
+
+[node name="GoldTokens" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 69, 190 )
+texture = ExtResource( 3 )
+
+[node name="Small1" type="Sprite" parent="PlayerTokens/GoldTokens"]
+position = Vector2( -21, 6 )
+texture = ExtResource( 21 )
+
+[node name="BlackCard" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 104, 184 )
+texture = ExtResource( 23 )
+
+[node name="Big5" type="Sprite" parent="PlayerTokens/BlackCard"]
+position = Vector2( -10, -13 )
+texture = ExtResource( 17 )
+
+[node name="BlackTokens" type="Sprite" parent="PlayerTokens/BlackCard"]
+position = Vector2( 12, 7 )
+texture = ExtResource( 5 )
+
+[node name="Small3" type="Sprite" parent="PlayerTokens/BlackCard/BlackTokens"]
+position = Vector2( -19, 8 )
+texture = ExtResource( 10 )
+
+[node name="RedCard" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 147, 183 )
+texture = ExtResource( 15 )
+
+[node name="Big2" type="Sprite" parent="PlayerTokens/RedCard"]
+position = Vector2( -9, -15 )
+texture = ExtResource( 18 )
+
+[node name="RedTokens" type="Sprite" parent="PlayerTokens/RedCard"]
+position = Vector2( 13, 7 )
+texture = ExtResource( 8 )
+
+[node name="Small5" type="Sprite" parent="PlayerTokens/RedCard/RedTokens"]
+position = Vector2( -21, 7 )
+texture = ExtResource( 13 )
+
+[node name="GreenCard" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 196, 182 )
+texture = ExtResource( 14 )
+
+[node name="Big10" type="Sprite" parent="PlayerTokens/GreenCard"]
+position = Vector2( -9, -14 )
+texture = ExtResource( 11 )
+
+[node name="GreenTokens" type="Sprite" parent="PlayerTokens/GreenCard"]
+position = Vector2( 12, 8 )
+texture = ExtResource( 6 )
+
+[node name="Small6" type="Sprite" parent="PlayerTokens/GreenCard/GreenTokens"]
+position = Vector2( -16, 9 )
+texture = ExtResource( 12 )
+
+[node name="BlueCard" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 244, 182 )
+texture = ExtResource( 22 )
+
+[node name="Big3" type="Sprite" parent="PlayerTokens/BlueCard"]
+position = Vector2( -10, -16 )
+texture = ExtResource( 20 )
+
+[node name="BlueTokens" type="Sprite" parent="PlayerTokens/BlueCard"]
+position = Vector2( 14, 8 )
+texture = ExtResource( 4 )
+
+[node name="Small10" type="Sprite" parent="PlayerTokens/BlueCard/BlueTokens"]
+position = Vector2( -19, 11 )
+texture = ExtResource( 16 )
+
+[node name="WhiteCard" type="Sprite" parent="PlayerTokens"]
+position = Vector2( 294, 182 )
+texture = ExtResource( 9 )
+
+[node name="Big4" type="Sprite" parent="PlayerTokens/WhiteCard"]
+position = Vector2( -10, -15 )
+texture = ExtResource( 19 )
+
+[node name="WhiteTokens" type="Sprite" parent="PlayerTokens/WhiteCard"]
+position = Vector2( 13, 8 )
+texture = ExtResource( 7 )
+
+[node name="Small3" type="Sprite" parent="PlayerTokens/WhiteCard/WhiteTokens"]
+position = Vector2( -18, 7 )
+texture = ExtResource( 10 )
+
+[node name="Deck" type="Node2D" parent="."]
+position = Vector2( 108, 19 )
+
+[node name="GreenTier" type="Node2D" parent="Deck"]
+position = Vector2( 17, -8 )
+
+[node name="Card" parent="Deck/GreenTier" instance=ExtResource( 1 )]
+position = Vector2( -31, -27 )
+
+[node name="Card2" parent="Deck/GreenTier" instance=ExtResource( 1 )]
+position = Vector2( 10, -27 )
+
+[node name="Card3" parent="Deck/GreenTier" instance=ExtResource( 1 )]
+position = Vector2( 51, -27 )
+
+[node name="Card4" parent="Deck/GreenTier" instance=ExtResource( 1 )]
+position = Vector2( 92, -27 )
+
+[node name="YellowTier" type="Node2D" parent="Deck"]
+position = Vector2( 17, 47 )
+
+[node name="Card" parent="Deck/YellowTier" instance=ExtResource( 1 )]
+position = Vector2( -31, -27 )
+
+[node name="Card2" parent="Deck/YellowTier" instance=ExtResource( 1 )]
+position = Vector2( 10, -27 )
+
+[node name="Card3" parent="Deck/YellowTier" instance=ExtResource( 1 )]
+position = Vector2( 51, -27 )
+
+[node name="Card4" parent="Deck/YellowTier" instance=ExtResource( 1 )]
+position = Vector2( 92, -27 )
+
+[node name="BlueTier" type="Node2D" parent="Deck"]
+position = Vector2( 17, 102 )
+
+[node name="Card" parent="Deck/BlueTier" instance=ExtResource( 1 )]
+position = Vector2( -31, -27 )
+
+[node name="Card2" parent="Deck/BlueTier" instance=ExtResource( 1 )]
+position = Vector2( 10, -27 )
+
+[node name="Card3" parent="Deck/BlueTier" instance=ExtResource( 1 )]
+position = Vector2( 51, -27 )
+
+[node name="Card4" parent="Deck/BlueTier" instance=ExtResource( 1 )]
+position = Vector2( 92, -27 )
+
+[node name="Nobles" type="Node2D" parent="."]
+position = Vector2( 48, -31 )
+
+[node name="Noble" parent="Nobles" instance=ExtResource( 35 )]
+
+[node name="Noble2" parent="Nobles" instance=ExtResource( 35 )]
+position = Vector2( 1, 43 )
+
+[node name="Noble3" parent="Nobles" instance=ExtResource( 35 )]
+position = Vector2( 1, 86 )
+
+[node name="Selection" type="Node2D" parent="."]
+position = Vector2( 2, -2 )
+
+[node name="Background" type="Sprite" parent="Selection"]
+position = Vector2( 56.5, 240.5 )
+scale = Vector2( 0.188333, 0.13785 )
+texture = ExtResource( 37 )
+
+[node name="RedTokens" type="Sprite" parent="Selection"]
+position = Vector2( 28, 246 )
+texture = ExtResource( 8 )
+
+[node name="GreenTokens" type="Sprite" parent="Selection"]
+position = Vector2( 58, 247 )
+texture = ExtResource( 6 )
+
+[node name="BlueTokens" type="Sprite" parent="Selection"]
+position = Vector2( 88, 246 )
+texture = ExtResource( 4 )
+
+[node name="Cancel" type="Sprite" parent="Selection"]
+position = Vector2( 31.25, 224.25 )
+scale = Vector2( 0.0302083, 0.0302083 )
+texture = ExtResource( 36 )
+
+[node name="Cancel2" type="Sprite" parent="Selection"]
+position = Vector2( 60, 226 )
+scale = Vector2( 0.0322917, 0.0302083 )
+texture = ExtResource( 36 )
+
+[node name="Cancel3" type="Sprite" parent="Selection"]
+position = Vector2( 85, 226 )
+scale = Vector2( 0.028125, 0.028125 )
+texture = ExtResource( 36 )
+
+[node name="PlayerStats" type="Node2D" parent="."]
+
+[node name="Player1" type="Node2D" parent="PlayerStats"]
+position = Vector2( 18, 10 )
+
+[node name="Border" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 38, 25.5 )
+scale = Vector2( 0.0933333, 0.0641667 )
+texture = ExtResource( 34 )
+
+[node name="GoldGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 14, 19 )
+texture = ExtResource( 28 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player1/GoldGem"]
+position = Vector2( -11, 8 )
+texture = ExtResource( 10 )
+
+[node name="BlueGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 37, 41 )
+texture = ExtResource( 32 )
+
+[node name="Big10" type="Sprite" parent="PlayerStats/Player1/BlueGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 11 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player1/BlueGem"]
+position = Vector2( -11, 7 )
+texture = ExtResource( 10 )
+
+[node name="BlackGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 36, 21 )
+texture = ExtResource( 26 )
+
+[node name="Big4" type="Sprite" parent="PlayerStats/Player1/BlackGem"]
+position = Vector2( 0, 1 )
+texture = ExtResource( 19 )
+
+[node name="Small4" type="Sprite" parent="PlayerStats/Player1/BlackGem"]
+position = Vector2( -10, 6 )
+texture = ExtResource( 25 )
+
+[node name="RedGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 58, 21 )
+texture = ExtResource( 31 )
+
+[node name="Big2" type="Sprite" parent="PlayerStats/Player1/RedGem"]
+texture = ExtResource( 18 )
+
+[node name="Small1" type="Sprite" parent="PlayerStats/Player1/RedGem"]
+position = Vector2( -10, 7 )
+texture = ExtResource( 21 )
+
+[node name="GreenGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 13, 41 )
+texture = ExtResource( 30 )
+
+[node name="Big3" type="Sprite" parent="PlayerStats/Player1/GreenGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 20 )
+
+[node name="Small5" type="Sprite" parent="PlayerStats/Player1/GreenGem"]
+position = Vector2( -10, 5 )
+texture = ExtResource( 13 )
+
+[node name="WhiteGem" type="Sprite" parent="PlayerStats/Player1"]
+position = Vector2( 60, 41 )
+texture = ExtResource( 29 )
+
+[node name="Big1" type="Sprite" parent="PlayerStats/Player1/WhiteGem"]
+position = Vector2( -1, 2 )
+texture = ExtResource( 27 )
+
+[node name="Small2" type="Sprite" parent="PlayerStats/Player1/WhiteGem"]
+position = Vector2( -12, 6 )
+texture = ExtResource( 33 )
+
+[node name="Label" type="Label" parent="PlayerStats/Player1"]
+margin_left = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+text = "Saran (Host)"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player2" type="Node2D" parent="PlayerStats"]
+position = Vector2( 18, 79 )
+
+[node name="Border" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 38, 25.5 )
+scale = Vector2( 0.0933333, 0.0641667 )
+texture = ExtResource( 34 )
+
+[node name="GoldGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 14, 19 )
+texture = ExtResource( 28 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player2/GoldGem"]
+position = Vector2( -11, 8 )
+texture = ExtResource( 10 )
+
+[node name="BlueGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 37, 41 )
+texture = ExtResource( 32 )
+
+[node name="Big10" type="Sprite" parent="PlayerStats/Player2/BlueGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 11 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player2/BlueGem"]
+position = Vector2( -11, 7 )
+texture = ExtResource( 10 )
+
+[node name="BlackGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 36, 21 )
+texture = ExtResource( 26 )
+
+[node name="Big4" type="Sprite" parent="PlayerStats/Player2/BlackGem"]
+position = Vector2( 0, 1 )
+texture = ExtResource( 19 )
+
+[node name="Small4" type="Sprite" parent="PlayerStats/Player2/BlackGem"]
+position = Vector2( -10, 6 )
+texture = ExtResource( 25 )
+
+[node name="RedGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 58, 21 )
+texture = ExtResource( 31 )
+
+[node name="Big2" type="Sprite" parent="PlayerStats/Player2/RedGem"]
+texture = ExtResource( 18 )
+
+[node name="Small1" type="Sprite" parent="PlayerStats/Player2/RedGem"]
+position = Vector2( -10, 7 )
+texture = ExtResource( 21 )
+
+[node name="GreenGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 13, 41 )
+texture = ExtResource( 30 )
+
+[node name="Big3" type="Sprite" parent="PlayerStats/Player2/GreenGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 20 )
+
+[node name="Small5" type="Sprite" parent="PlayerStats/Player2/GreenGem"]
+position = Vector2( -10, 5 )
+texture = ExtResource( 13 )
+
+[node name="WhiteGem" type="Sprite" parent="PlayerStats/Player2"]
+position = Vector2( 60, 41 )
+texture = ExtResource( 29 )
+
+[node name="Big1" type="Sprite" parent="PlayerStats/Player2/WhiteGem"]
+position = Vector2( -1, 2 )
+texture = ExtResource( 27 )
+
+[node name="Small2" type="Sprite" parent="PlayerStats/Player2/WhiteGem"]
+position = Vector2( -12, 6 )
+texture = ExtResource( 33 )
+
+[node name="Label" type="Label" parent="PlayerStats/Player2"]
+margin_left = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+text = "Vishruth"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player3" type="Node2D" parent="PlayerStats"]
+position = Vector2( 18, 148 )
+
+[node name="Border" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 38, 25.5 )
+scale = Vector2( 0.0933333, 0.0641667 )
+texture = ExtResource( 34 )
+
+[node name="GoldGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 14, 19 )
+texture = ExtResource( 28 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player3/GoldGem"]
+position = Vector2( -11, 8 )
+texture = ExtResource( 10 )
+
+[node name="BlueGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 37, 41 )
+texture = ExtResource( 32 )
+
+[node name="Big10" type="Sprite" parent="PlayerStats/Player3/BlueGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 11 )
+
+[node name="Small3" type="Sprite" parent="PlayerStats/Player3/BlueGem"]
+position = Vector2( -11, 7 )
+texture = ExtResource( 10 )
+
+[node name="BlackGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 36, 21 )
+texture = ExtResource( 26 )
+
+[node name="Big4" type="Sprite" parent="PlayerStats/Player3/BlackGem"]
+position = Vector2( 0, 1 )
+texture = ExtResource( 19 )
+
+[node name="Small4" type="Sprite" parent="PlayerStats/Player3/BlackGem"]
+position = Vector2( -10, 6 )
+texture = ExtResource( 25 )
+
+[node name="RedGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 58, 21 )
+texture = ExtResource( 31 )
+
+[node name="Big2" type="Sprite" parent="PlayerStats/Player3/RedGem"]
+texture = ExtResource( 18 )
+
+[node name="Small1" type="Sprite" parent="PlayerStats/Player3/RedGem"]
+position = Vector2( -10, 7 )
+texture = ExtResource( 21 )
+
+[node name="GreenGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 13, 41 )
+texture = ExtResource( 30 )
+
+[node name="Big3" type="Sprite" parent="PlayerStats/Player3/GreenGem"]
+position = Vector2( 0, 2 )
+texture = ExtResource( 20 )
+
+[node name="Small5" type="Sprite" parent="PlayerStats/Player3/GreenGem"]
+position = Vector2( -10, 5 )
+texture = ExtResource( 13 )
+
+[node name="WhiteGem" type="Sprite" parent="PlayerStats/Player3"]
+position = Vector2( 60, 41 )
+texture = ExtResource( 29 )
+
+[node name="Big1" type="Sprite" parent="PlayerStats/Player3/WhiteGem"]
+position = Vector2( -1, 2 )
+texture = ExtResource( 27 )
+
+[node name="Small2" type="Sprite" parent="PlayerStats/Player3/WhiteGem"]
+position = Vector2( -12, 6 )
+texture = ExtResource( 33 )
+
+[node name="Label" type="Label" parent="PlayerStats/Player3"]
+margin_left = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+text = "Rooshi"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

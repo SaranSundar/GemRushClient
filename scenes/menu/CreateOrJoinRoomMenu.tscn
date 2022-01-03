@@ -58,5 +58,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="UsernameInput" type="LineEdit" parent="Panel"]
+margin_left = 2.0
+margin_top = 39.0
+margin_right = 204.0
+margin_bottom = 63.0
+placeholder_text = "Enter Username Here"
+
 [connection signal="pressed" from="Panel/JoinRoom" to="." method="_on_JoinRoom_pressed"]
 [connection signal="pressed" from="Panel/CreateRoom" to="." method="_on_CreateRoom_pressed"]

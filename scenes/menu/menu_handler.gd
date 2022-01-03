@@ -10,6 +10,25 @@ enum MENU_LEVEL {
 		JOIN,
 		OPTIONS
 	}
+
+
+static func delete_children(node):
+	for n in node.get_children():
+		node.remove_child(n)
+		n.queue_free()
+	
+func load_board(game_state: GameState, room: RoomDTO):
+	# Remove the current level
+	var root = Constants.root
+
+	# Add the next level
+	var board_scene = load("res://scenes/board/Board.tscn")
+	var board: Board = board_scene.instance()
+	board.init(room, game_state)
+	
+	
+	delete_children(root)
+	root.add_child(board)
 	
 func load_menu(new_menu, current_scene):
 	call_deferred("_deferred_load_menu", new_menu, current_scene)

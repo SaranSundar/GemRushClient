@@ -6,12 +6,14 @@ var host_player: Player
 var start_game_button: Button
 var http_client: HttpRequestClient
 var game_state: GameState
+var menu_handler: MenuHandler
 
 var room: RoomDTO
 
-var timer: Timer
+var start_time = OS.get_ticks_msec()
 
-func init(room_dto: RoomDTO, player: Player):
+func init(room_dto: RoomDTO, player: Player, menu_handler: MenuHandler):
+	self.menu_handler = menu_handler
 	room_id_input = $Panel/RoomIdInput
 	room_id_input.text = room_dto.id
 	players_joined = $PlayersJoined
@@ -28,19 +30,17 @@ func init(room_dto: RoomDTO, player: Player):
 	http_client.connect_game_state_created_to_game_state_received(self)
 	update_players_joined()
 	
-	timer = $Timer
-	timer.connect("timeout", self, "_on_Timer_timeout")
-	timer.set_wait_time(5)
-	timer.set_paused(false)
-	timer.set_one_shot(false) # Make sure it loops
-	timer.start()
+	start_time = OS.get_ticks_msec()
 
 func _on_Timer_timeout():
 	print("Calling get room")
-	http_client.get_room_request.get_room(room.id)  
+	http_client.get_room_request.get_room(room.id)
 
 func _process(delta):
-	pass
+	var elapsed_time = OS.get_ticks_msec() - start_time
+	if elapsed_time > 10000:
+		_on_Timer_timeout()
+		start_time = OS.get_ticks_msec()
 
 func room_received(room_dto):
 	print("Room received")
@@ -48,9 +48,6 @@ func room_received(room_dto):
 	room = room_dto
 	update_players_joined()
 	if room.game_state_id != "" and room.game_state_id != null:
-		timer.stop()
-		timer.emit_signal("timeout")
-		timer.queue_free()
 		http_client.get_game_state_request.get_game_state(room.game_state_id)
 
 static func delete_children(node):
@@ -62,6 +59,7 @@ func game_state_received(game_state_dto):
 	print("Game State received")
 	print(game_state_dto)
 	game_state = game_state_dto
+	menu_handler.load_board(game_state, room)
 
 func create_player_container(player: Player):
 	var player_id = Label.new()
@@ -81,3 +79,7 @@ func update_players_joined():
 		players_joined.add_child(create_player_container(player))
 		
 		
+
+
+func _on_StartGame_pressed():
+	http_client.start_game_request.start_game(room.id)

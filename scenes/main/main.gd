@@ -9,6 +9,7 @@ var CreateOrJoinRoomMenuScene = preload("res://scenes/menu/CreateOrJoinRoomMenu.
 const uuid_util = preload('res://scripts/uuid/uuid.gd')
 
 func _ready():
+	Constants.root = self
 	# Will create player id and show ui to create or join game
 	var uid: String = OS.get_unique_id()
 	if uid == "":
@@ -18,7 +19,7 @@ func _ready():
 	menu_handler = MenuHandler.new()
 	var create_or_join_room_menu = CreateOrJoinRoomMenuScene.instance()
 	create_or_join_room_menu.init(host_player, menu_handler)
-	# menu_handler.load_menu(create_or_join_room_menu, self)
+	menu_handler.load_menu(create_or_join_room_menu, self)
 #
 #func end_turn():
 #	var room_id = room.id

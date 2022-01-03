@@ -143,4 +143,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
+[connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
