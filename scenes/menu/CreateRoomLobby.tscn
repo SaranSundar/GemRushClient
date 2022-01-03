@@ -11,8 +11,10 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 319.0
-margin_bottom = 178.0
+margin_left = 70.0
+margin_top = 44.0
+margin_right = 389.0
+margin_bottom = 222.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -38,102 +40,102 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Label2" type="Label" parent="Panel"]
 margin_left = 9.0
 margin_top = 61.0
 margin_right = 98.0
 margin_bottom = 75.0
 text = "Players Joined"
 
-[node name="PlayersJoined" type="VBoxContainer" parent="."]
+[node name="PlayersJoined" type="VBoxContainer" parent="Panel"]
 margin_left = 10.0
 margin_top = 81.0
-margin_right = 50.0
-margin_bottom = 121.0
+margin_right = 174.0
+margin_bottom = 167.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayersJoined"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/PlayersJoined"]
 margin_right = 164.0
 margin_bottom = 14.0
 
-[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/PlayersJoined/HBoxContainer"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Player Id: "
 
-[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer"]
+[node name="Label2" type="Label" parent="Panel/PlayersJoined/HBoxContainer"]
 margin_left = 68.0
 margin_right = 164.0
 margin_bottom = 14.0
 text = "saranuid (Host)"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PlayersJoined"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/PlayersJoined"]
 margin_top = 18.0
 margin_right = 164.0
 margin_bottom = 32.0
 
-[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/PlayersJoined/HBoxContainer2"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Player Id: "
 
-[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer2"]
+[node name="Label2" type="Label" parent="Panel/PlayersJoined/HBoxContainer2"]
 margin_left = 68.0
 margin_right = 140.0
 margin_bottom = 14.0
 text = "vishruthuid"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PlayersJoined"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/PlayersJoined"]
 margin_top = 36.0
 margin_right = 164.0
 margin_bottom = 50.0
 
-[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer3"]
+[node name="Label" type="Label" parent="Panel/PlayersJoined/HBoxContainer3"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Player Id: "
 
-[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer3"]
+[node name="Label2" type="Label" parent="Panel/PlayersJoined/HBoxContainer3"]
 margin_left = 68.0
 margin_right = 133.0
 margin_bottom = 14.0
 text = "juhwanuid"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PlayersJoined"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/PlayersJoined"]
 margin_top = 54.0
 margin_right = 164.0
 margin_bottom = 68.0
 
-[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer4"]
+[node name="Label" type="Label" parent="Panel/PlayersJoined/HBoxContainer4"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Player Id: "
 
-[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer4"]
+[node name="Label2" type="Label" parent="Panel/PlayersJoined/HBoxContainer4"]
 margin_left = 68.0
 margin_right = 128.0
 margin_bottom = 14.0
 text = "rooshiuid"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="PlayersJoined"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/PlayersJoined"]
 margin_top = 72.0
 margin_right = 164.0
 margin_bottom = 86.0
 
-[node name="Label" type="Label" parent="PlayersJoined/HBoxContainer5"]
+[node name="Label" type="Label" parent="Panel/PlayersJoined/HBoxContainer5"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Player Id: "
 
-[node name="Label2" type="Label" parent="PlayersJoined/HBoxContainer5"]
+[node name="Label2" type="Label" parent="Panel/PlayersJoined/HBoxContainer5"]
 margin_left = 68.0
 margin_right = 120.0
 margin_bottom = 14.0
 text = "rahuluid"
 
-[node name="StartGame" type="Button" parent="."]
+[node name="StartGame" type="Button" parent="Panel"]
 margin_left = 213.0
 margin_top = 121.0
 margin_right = 307.0
@@ -143,4 +145,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="Panel/StartGame" to="." method="_on_StartGame_pressed"]

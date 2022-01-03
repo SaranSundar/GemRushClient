@@ -16,8 +16,8 @@ func init(room_dto: RoomDTO, player: Player, menu_handler: MenuHandler):
 	self.menu_handler = menu_handler
 	room_id_input = $Panel/RoomIdInput
 	room_id_input.text = room_dto.id
-	players_joined = $PlayersJoined
-	start_game_button = $StartGame
+	players_joined = $Panel/PlayersJoined
+	start_game_button = $Panel/StartGame
 	room = room_dto
 	host_player = player
 	if room.owner.id != host_player.id:
