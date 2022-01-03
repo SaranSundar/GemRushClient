@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dto/player_state.gd"
 }, {
+"base": "Node2D",
+"class": "PlayerStats",
+"language": "GDScript",
+"path": "res://scenes/board/PlayerStats.gd"
+}, {
 "base": "Reference",
 "class": "RoomConfig",
 "language": "GDScript",
@@ -161,6 +166,7 @@ _global_script_class_icons={
 "Noble": "",
 "Player": "",
 "PlayerState": "",
+"PlayerStats": "",
 "RoomConfig": "",
 "RoomDTO": "",
 "StartGameRequest": "",

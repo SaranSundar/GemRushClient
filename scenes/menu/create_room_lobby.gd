@@ -82,4 +82,5 @@ func update_players_joined():
 
 
 func _on_StartGame_pressed():
+	# Only the room owner can start game, everyone else will just fetch game state if it exists
 	http_client.start_game_request.start_game(room.id)
