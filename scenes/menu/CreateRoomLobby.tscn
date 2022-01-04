@@ -11,10 +11,10 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 70.0
-margin_top = 44.0
-margin_right = 389.0
-margin_bottom = 222.0
+margin_left = 700.0
+margin_top = 375.0
+margin_right = 1019.0
+margin_bottom = 553.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
