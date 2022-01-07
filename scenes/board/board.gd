@@ -17,6 +17,7 @@ func update_player_stats():
 		var player: Player = p
 		var player_stats: PlayerStats = PlayerStatsScene.instance()
 		player_stats_hud.add_child(player_stats)
-		player_stats.init(player.id)
+		var player_state: PlayerState = game_state.player_states[player.id]
+		player_stats.init(player.id, player_state)
 	
 

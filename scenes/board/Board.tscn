@@ -1,71 +1,94 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
+[ext_resource path="res://assets/card/green_token.png" type="Texture" id=3]
+[ext_resource path="res://assets/card/blue_token.png" type="Texture" id=4]
 [ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
+[ext_resource path="res://assets/card/red_token.png" type="Texture" id=6]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
 [ext_resource path="res://scenes/board/PlayerStats.tscn" type="PackedScene" id=26]
 
 [sub_resource type="StreamTexture" id=2]
+flags = 4
 load_path = "res://.import/small_3.png-59abbe2deedac50589c510f33755f902.stex"
 
 [sub_resource type="StreamTexture" id=1]
+flags = 4
 load_path = "res://.import/gold_tokens.png-758b7757784976de716d9cf3e28e5b92.stex"
 
 [sub_resource type="StreamTexture" id=5]
+flags = 4
 load_path = "res://.import/red_tokens.png-e575259e41ae0080842bc581c3df16bb.stex"
 
 [sub_resource type="StreamTexture" id=6]
+flags = 4
 load_path = "res://.import/small_10.png-d4f3cf38f9b42936e6e7a419b6fd88ac.stex"
 
 [sub_resource type="StreamTexture" id=7]
+flags = 4
 load_path = "res://.import/green_tokens.png-fdd4809f8149a0863e6c695a9009ee64.stex"
 
 [sub_resource type="StreamTexture" id=8]
+flags = 4
 load_path = "res://.import/small_4.png-b0c7eedfff0b11ab406d282a4a15917f.stex"
 
 [sub_resource type="StreamTexture" id=9]
+flags = 4
 load_path = "res://.import/blue_tokens.png-d2897eae3a71775fc9692c20547be187.stex"
 
 [sub_resource type="StreamTexture" id=10]
+flags = 4
 load_path = "res://.import/small_1.png-3138600a1ff57fa3e518660b197a207e.stex"
 
 [sub_resource type="StreamTexture" id=11]
+flags = 4
 load_path = "res://.import/white_tokens.png-8801da8180ef05d6b06a7a2e8cc42ac5.stex"
 
 [sub_resource type="StreamTexture" id=12]
+flags = 4
 load_path = "res://.import/small_8.png-42de97d31825a87f50d3dce896f4fd32.stex"
 
 [sub_resource type="StreamTexture" id=15]
+flags = 4
 load_path = "res://.import/red_card.png-375e6424b3545a6c04d2b4da162db37a.stex"
 
 [sub_resource type="StreamTexture" id=16]
+flags = 4
 load_path = "res://.import/big_2.png-ef17d45cc7bbbeb0d15cf9933a4903ec.stex"
 
 [sub_resource type="StreamTexture" id=17]
+flags = 4
 load_path = "res://.import/small_5.png-99b144077070b9e6e9408dfdfa0ecb3a.stex"
 
 [sub_resource type="StreamTexture" id=18]
+flags = 4
 load_path = "res://.import/green_card.png-08a547018b6e2bf1ea3b03d399806435.stex"
 
 [sub_resource type="StreamTexture" id=19]
+flags = 4
 load_path = "res://.import/big_10.png-ccd5f55af8a44f33f339b3294e0c354b.stex"
 
 [sub_resource type="StreamTexture" id=4]
+flags = 4
 load_path = "res://.import/small_6.png-7b29ff3a19e6d558515df1fcf1bdcf6b.stex"
 
 [sub_resource type="StreamTexture" id=20]
+flags = 4
 load_path = "res://.import/blue_card.png-d564550bb53cbfc4d9753c2fa72113ca.stex"
 
 [sub_resource type="StreamTexture" id=21]
+flags = 4
 load_path = "res://.import/big_3.png-3d0692e976a74189669965a0622d51d1.stex"
 
 [sub_resource type="StreamTexture" id=22]
+flags = 4
 load_path = "res://.import/white_card.png-a04adb9086aad081355109e8a406d3d4.stex"
 
 [sub_resource type="StreamTexture" id=23]
+flags = 4
 load_path = "res://.import/big_4.png-a6f71f36c8910cbe050b812f98e3f185.stex"
 
 [sub_resource type="StreamTexture" id=24]
@@ -83,7 +106,7 @@ script = ExtResource( 2 )
 position = Vector2( 96, 7 )
 
 [node name="BlackTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1565, 284 )
+position = Vector2( 1705, 284 )
 texture = ExtResource( 5 )
 
 [node name="Small4" type="Sprite" parent="Bank/BlackTokens"]
@@ -92,24 +115,24 @@ texture = SubResource( 2 )
 offset = Vector2( 380, -56 )
 
 [node name="GoldTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1565, 136 )
+position = Vector2( 1702, 136 )
 texture = SubResource( 1 )
 
 [node name="Small3" type="Sprite" parent="Bank/GoldTokens"]
-position = Vector2( -463, 88 )
+position = Vector2( -453, 105 )
 texture = SubResource( 2 )
 offset = Vector2( 380, -56 )
 
 [node name="RedTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1564, 424 )
+position = Vector2( 1706, 424 )
 texture = SubResource( 5 )
 
 [node name="Small10" type="Sprite" parent="Bank/RedTokens"]
-position = Vector2( -87, 39 )
+position = Vector2( -89, 40 )
 texture = SubResource( 6 )
 
 [node name="GreenTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1556, 572 )
+position = Vector2( 1698, 572 )
 texture = SubResource( 7 )
 
 [node name="Small4" type="Sprite" parent="Bank/GreenTokens"]
@@ -117,7 +140,7 @@ position = Vector2( -81, 44 )
 texture = SubResource( 8 )
 
 [node name="BlueTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1566, 706 )
+position = Vector2( 1705, 706 )
 texture = SubResource( 9 )
 
 [node name="Small1" type="Sprite" parent="Bank/BlueTokens"]
@@ -125,7 +148,7 @@ position = Vector2( -71, 38 )
 texture = SubResource( 10 )
 
 [node name="WhiteTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1577, 840 )
+position = Vector2( 1710, 840 )
 texture = SubResource( 11 )
 
 [node name="Small8" type="Sprite" parent="Bank/WhiteTokens"]
@@ -136,7 +159,7 @@ texture = SubResource( 12 )
 position = Vector2( 76, 53 )
 
 [node name="GoldTokens" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 141, 952 )
+position = Vector2( 428, 952 )
 texture = SubResource( 1 )
 
 [node name="Small1" type="Sprite" parent="PlayerTokens/GoldTokens"]
@@ -144,7 +167,7 @@ position = Vector2( -78, 48 )
 texture = SubResource( 10 )
 
 [node name="RedCard" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 508, 893 )
+position = Vector2( 806, 904 )
 texture = SubResource( 15 )
 
 [node name="Big2" type="Sprite" parent="PlayerTokens/RedCard"]
@@ -160,7 +183,7 @@ position = Vector2( -83, 44 )
 texture = SubResource( 17 )
 
 [node name="GreenCard" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 730, 880 )
+position = Vector2( 1024, 901 )
 texture = SubResource( 18 )
 
 [node name="Big10" type="Sprite" parent="PlayerTokens/GreenCard"]
@@ -176,7 +199,7 @@ position = Vector2( -78, 38 )
 texture = SubResource( 4 )
 
 [node name="BlueCard" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 967, 889 )
+position = Vector2( 1247, 900 )
 texture = SubResource( 20 )
 
 [node name="Big3" type="Sprite" parent="PlayerTokens/BlueCard"]
@@ -192,7 +215,7 @@ position = Vector2( -79, 39 )
 texture = SubResource( 6 )
 
 [node name="WhiteCard" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 1202, 887 )
+position = Vector2( 1481, 901 )
 texture = SubResource( 22 )
 
 [node name="Big4" type="Sprite" parent="PlayerTokens/WhiteCard"]
@@ -208,7 +231,7 @@ position = Vector2( -85, 37 )
 texture = SubResource( 2 )
 
 [node name="BlackCard" type="Sprite" parent="PlayerTokens"]
-position = Vector2( 294, 906 )
+position = Vector2( 585, 906 )
 texture = ExtResource( 23 )
 
 [node name="BlackTokens" type="Sprite" parent="PlayerTokens/BlackCard"]
@@ -227,85 +250,92 @@ texture = ExtResource( 10 )
 position = Vector2( 108, 19 )
 
 [node name="GreenTier" type="Node2D" parent="Deck"]
-position = Vector2( 17, -8 )
+position = Vector2( 609, 31 )
 
 [node name="Card" parent="Deck/GreenTier" instance=ExtResource( 1 )]
 position = Vector2( -31, -27 )
 
 [node name="Card2" parent="Deck/GreenTier" instance=ExtResource( 1 )]
-position = Vector2( 10, -27 )
+position = Vector2( 158, -27 )
 
 [node name="Card3" parent="Deck/GreenTier" instance=ExtResource( 1 )]
-position = Vector2( 51, -27 )
+position = Vector2( 351, -27 )
 
 [node name="Card4" parent="Deck/GreenTier" instance=ExtResource( 1 )]
-position = Vector2( 92, -27 )
+position = Vector2( 547, -27 )
 
 [node name="YellowTier" type="Node2D" parent="Deck"]
-position = Vector2( 17, 47 )
+position = Vector2( 609, 18 )
 
 [node name="Card" parent="Deck/YellowTier" instance=ExtResource( 1 )]
-position = Vector2( -31, -27 )
+position = Vector2( -31, 250 )
 
 [node name="Card2" parent="Deck/YellowTier" instance=ExtResource( 1 )]
-position = Vector2( 10, -27 )
+position = Vector2( 158, 250 )
 
 [node name="Card3" parent="Deck/YellowTier" instance=ExtResource( 1 )]
-position = Vector2( 51, -27 )
+position = Vector2( 351, 250 )
 
 [node name="Card4" parent="Deck/YellowTier" instance=ExtResource( 1 )]
-position = Vector2( 92, -27 )
+position = Vector2( 547, 250 )
 
 [node name="BlueTier" type="Node2D" parent="Deck"]
-position = Vector2( 17, 102 )
+position = Vector2( 609, 283 )
 
 [node name="Card" parent="Deck/BlueTier" instance=ExtResource( 1 )]
-position = Vector2( -31, -27 )
+position = Vector2( -31, 250 )
 
 [node name="Card2" parent="Deck/BlueTier" instance=ExtResource( 1 )]
-position = Vector2( 10, -27 )
+position = Vector2( 158, 250 )
 
 [node name="Card3" parent="Deck/BlueTier" instance=ExtResource( 1 )]
-position = Vector2( 51, -27 )
+position = Vector2( 351, 250 )
 
 [node name="Card4" parent="Deck/BlueTier" instance=ExtResource( 1 )]
-position = Vector2( 92, -27 )
+position = Vector2( 547, 250 )
 
 [node name="Selection" type="Node2D" parent="."]
-position = Vector2( 2, -2 )
+position = Vector2( 4, 397 )
 
 [node name="Background" type="Sprite" parent="Selection"]
-position = Vector2( 56.5, 240.5 )
-scale = Vector2( 0.188333, 0.13785 )
+position = Vector2( 195.5, 574 )
+scale = Vector2( 0.658333, 0.485981 )
 texture = SubResource( 24 )
 
-[node name="RedTokens" type="Sprite" parent="Selection"]
-position = Vector2( 28, 246 )
-texture = SubResource( 5 )
-
-[node name="GreenTokens" type="Sprite" parent="Selection"]
-position = Vector2( 58, 247 )
-texture = SubResource( 7 )
-
-[node name="BlueTokens" type="Sprite" parent="Selection"]
-position = Vector2( 88, 246 )
-texture = SubResource( 9 )
-
 [node name="Cancel" type="Sprite" parent="Selection"]
-position = Vector2( 31.25, 224.25 )
-scale = Vector2( 0.0302083, 0.0302083 )
+position = Vector2( 91, 508 )
+scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
 [node name="Cancel2" type="Sprite" parent="Selection"]
-position = Vector2( 60, 226 )
-scale = Vector2( 0.0322917, 0.0302083 )
+position = Vector2( 198, 511 )
+scale = Vector2( 0.102865, 0.0950521 )
 texture = SubResource( 25 )
 
 [node name="Cancel3" type="Sprite" parent="Selection"]
-position = Vector2( 85, 226 )
-scale = Vector2( 0.028125, 0.028125 )
+position = Vector2( 303, 514 )
+scale = Vector2( 0.103646, 0.101563 )
 texture = SubResource( 25 )
 
+[node name="BlueToken" type="Sprite" parent="Selection"]
+position = Vector2( 198, 578 )
+texture = ExtResource( 4 )
+
+[node name="GreenToken" type="Sprite" parent="Selection"]
+position = Vector2( 314, 580 )
+texture = ExtResource( 3 )
+
+[node name="RedToken" type="Sprite" parent="Selection"]
+position = Vector2( 80, 580 )
+texture = ExtResource( 6 )
+
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
+position = Vector2( 0, 24 )
 
 [node name="Player1" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+
+[node name="Player2" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+position = Vector2( 18, 275 )
+
+[node name="Player3" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+position = Vector2( 18, 536 )

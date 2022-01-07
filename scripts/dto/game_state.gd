@@ -17,7 +17,11 @@ var deck: Deck
 func init_from_json(json):
 	id = json['id']
 	# Player id -> PlayerState
-	player_states = json['player_states']
+	var json_player_states = json['player_states']
+	for player_id in json_player_states:
+		var new_player_state = PlayerState.new()
+		new_player_state.init_from_json(json_player_states[player_id])
+		player_states[player_id] = new_player_state
 	deck = Deck.new(json['deck'])
 	turn_number = json['turn_number']
 	turn_order = json['turn_order']

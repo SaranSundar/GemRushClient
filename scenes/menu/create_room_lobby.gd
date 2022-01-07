@@ -16,7 +16,7 @@ func init(room_dto: RoomDTO, player: Player, menu_handler: MenuHandler):
 	self.menu_handler = menu_handler
 	room_id_input = $Panel/RoomIdInput
 	room_id_input.text = room_dto.id
-	players_joined = $Panel/PlayersJoined
+	players_joined = $Panel/Control/PlayersJoined
 	start_game_button = $Panel/StartGame
 	room = room_dto
 	host_player = player
@@ -61,22 +61,31 @@ func game_state_received(game_state_dto):
 	game_state = game_state_dto
 	menu_handler.load_board(game_state, room)
 
-func create_player_container(player: Player):
-	var player_id = Label.new()
-	player_id.text = "Player Id: " + player.id
+func create_player_container(player: Player, player_id: HBoxContainer):
+	if player == null:
+		player_id.visible = false
+		return
+	else:
+		player_id.visible = true
+	var player_id_label: Label = player_id.get_child(1)
+	player_id_label.text = player.id
 	if player.id == room.owner.id:
-		player_id.text += " (Host)"
-	return player_id
+		player_id_label.text += " (Host)"
 
 func update_players_joined():
 	if room == null:
 		return
 	
-	delete_children(players_joined)
-		
-	for p in room.players:
-		var player: Player = p
-		players_joined.add_child(create_player_container(player))
+	# delete_children(players_joined)
+	
+	var index = 0
+	
+	for child_label in players_joined.get_children():
+		var player: Player = null
+		if index < len(room.players):
+			player = room.players[index]
+		create_player_container(player, child_label)
+		index += 1
 		
 		
 
