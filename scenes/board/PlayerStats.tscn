@@ -18,7 +18,7 @@
 [ext_resource path="res://assets/card/small_2.png" type="Texture" id=16]
 [ext_resource path="res://assets/card/big_3.png" type="Texture" id=17]
 [ext_resource path="res://scenes/board/PlayerStats.gd" type="Script" id=18]
-[ext_resource path="res://assets/fonts/dreamwood-font.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://assets/fonts/JmharkhamRegular-olD0.ttf" type="DynamicFontData" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 37
@@ -102,9 +102,9 @@ texture = ExtResource( 16 )
 
 [node name="PlayerId" type="Label" parent="."]
 margin_left = 63.0
-margin_top = 5.0
+margin_top = -7.0
 margin_right = 324.0
-margin_bottom = 43.0
+margin_bottom = 44.0
 custom_fonts/font = SubResource( 1 )
 text = "Saran (Host)"
 align = 1

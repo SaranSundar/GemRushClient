@@ -17,13 +17,20 @@ func init(player_id: String, player_state: PlayerState):
 
 func update_tokens(player_state: PlayerState):
 	self.player_state = player_state
-	for i in range(1, len(token_colors)):
+	for i in range(0, len(token_colors)):
 		var num_tokens_owned: int = player_state.tokens[token_colors[i]]
 		gems[i].get_node("small").visible = num_tokens_owned > 0
 		gems[i].get_node("small").texture = load("res://assets/card/small_" + str(num_tokens_owned) + ".png")
-		var num_cards_owned: int = player_state.cards[token_colors[i]]
-		gems[i].get_node("big").visible = num_cards_owned > 0
-		gems[i].get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
+		var num_cards_owned: int = 0
+		if i != 0:
+			if token_colors[i] in player_state.cards:
+				num_cards_owned = player_state.cards[token_colors[i]]
+			gems[i].get_node("big").visible = num_cards_owned > 0
+			gems[i].get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
+		if num_cards_owned == 0 and num_tokens_owned == 0:
+			gems[i].visible = false
+		else:
+			gems[i].visible = true
 		
 
 func set_player_id(player_id: String):
