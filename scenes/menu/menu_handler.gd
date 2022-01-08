@@ -17,14 +17,14 @@ static func delete_children(node):
 		node.remove_child(n)
 		n.queue_free()
 	
-func load_board(game_state: GameState, room: RoomDTO):
+func load_board(game_state: GameState, room: RoomDTO, host_player: Player):
 	# Remove the current level
 	var root = Constants.root
 
 	# Add the next level
 	var board_scene = load("res://scenes/board/Board.tscn")
 	var board: Board = board_scene.instance()
-	board.init(room, game_state)
+	board.init(room, game_state, host_player)
 	
 	
 	delete_children(root)

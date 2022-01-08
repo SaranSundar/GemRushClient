@@ -59,7 +59,7 @@ func game_state_received(game_state_dto):
 	print("Game State received")
 	print(game_state_dto)
 	game_state = game_state_dto
-	menu_handler.load_board(game_state, room)
+	menu_handler.load_board(game_state, room, host_player)
 
 func create_player_container(player: Player, player_id: HBoxContainer):
 	if player == null:
