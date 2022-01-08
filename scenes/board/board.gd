@@ -17,6 +17,27 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	player_inventory = $PlayerInventory
 	update_player_stats()
 	update_bank()
+	update_player_inventory()
+
+func can_purchase_card(card: CardDTO, player_state: PlayerState):
+	# Calculate total tokens owned through card discounts and tokens
+	var card_cost = card.cost
+	var cost = {}
+	var can_buy = true
+	var gold_needed = 0
+	for token_color in card_cost:
+		var token_cost = get_value(card_cost, token_color)  - get_value(player_state.cards, token_color)
+		if token_cost > 0:
+			if token_cost - get_value(player_state.tokens, token_color) <= 0:
+				cost[token_color] = get_value(player_state.tokens, token_color) - token_cost
+			else:
+				can_buy = false
+	
+func get_value(dictionary, key):
+	if key in dictionary:
+		return dictionary[key]
+	else:
+		return 0
 
 func update_bank():
 	var token_colors = Constants.token_colors
@@ -28,6 +49,7 @@ func update_bank():
 			num_tokens_owned = bank[token_colors[i]]
 		child_node.get_node("small").visible = num_tokens_owned > 0
 		child_node.get_node("small").texture = load("res://assets/card/small_" + str(num_tokens_owned) + ".png")
+		child_node.visible = num_tokens_owned > 0
 		i += 1
 		
 func update_player_inventory():
