@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/card/blue_token.png" type="Texture" id=4]
 [ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
 [ext_resource path="res://assets/card/red_token.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/wonderbar.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
@@ -98,6 +99,10 @@ load_path = "res://.import/selection.jpeg-5693a168b9988778a91a26dcdb76c9e5.stex"
 [sub_resource type="StreamTexture" id=25]
 flags = 4
 load_path = "res://.import/cancel.png-ab4f0a23e2dae667cbb2bc0ab7383bcc.stex"
+
+[sub_resource type="DynamicFont" id=26]
+size = 42
+font_data = ExtResource( 7 )
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 2 )
@@ -249,7 +254,7 @@ position = Vector2( -50, -69 )
 texture = ExtResource( 17 )
 
 [node name="Deck" type="Node2D" parent="."]
-position = Vector2( 108, 19 )
+position = Vector2( 60, 19 )
 
 [node name="GreenTier" type="Node2D" parent="Deck"]
 position = Vector2( 609, 31 )
@@ -341,3 +346,32 @@ position = Vector2( 18, 275 )
 
 [node name="Player3" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
 position = Vector2( 18, 536 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndTurn" type="Button" parent="Control"]
+margin_left = 1451.0
+margin_top = 632.0
+margin_right = 1678.0
+margin_bottom = 740.0
+custom_fonts/font = SubResource( 26 )
+text = "End Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkipTurn" type="Button" parent="Control"]
+margin_left = 1448.0
+margin_top = 496.0
+margin_right = 1677.0
+margin_bottom = 604.0
+custom_fonts/font = SubResource( 26 )
+text = "Skip Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}

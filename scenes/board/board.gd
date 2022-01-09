@@ -7,6 +7,7 @@ var PlayerStatsScene = preload("res://scenes/board/PlayerStats.tscn")
 var bank_node: Node2D
 var player_inventory: Node2D
 var host_player: Player
+var deck: Node2D
 
 func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	self.room = room
@@ -15,23 +16,86 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	bank_node = $Bank
 	player_stats_hud = $PlayerStatsHUD
 	player_inventory = $PlayerInventory
+	deck = $Deck
 	update_player_stats()
 	update_bank()
 	update_player_inventory()
+	update_board()
+	
+func update_board():
+	var board = game_state.deck.board
+	var green_tier = deck.get_node("GreenTier")
+	Constants.delete_children(green_tier)
+
+func update_valid_selections():
+	var player_states = game_state.player_states
+	var player_state: PlayerState = player_states[host_player.id]
+	
+	var green_tier = deck.get_node("GreenTier")
+	var cannot_purchase_color = Color("FF9999")
+	var no_color = Color(1, 1, 1)
+	
+	for card_nodes in green_tier.get_children():
+		var card: Card = card_nodes
+		var card_dto: CardDTO = card.card_dto
+		if can_purchase_card(card_dto, player_state):
+			card.modulate = cannot_purchase_color
+		else:
+			card.modulate = no_color
+		
+	
+func can_purchase_token(selected_tokens, new_token, player_state: PlayerState):
+	var player_token_count = player_state.get_token_count()
+	if player_token_count == 10:
+		return false
+		
+	if len(selected_tokens) == 0:
+		return true
+		
+	if len(selected_tokens) == 1:
+		if player_token_count == 9:
+			return false
+		else:
+			return true
+			
+	if len(selected_tokens) == 2:
+		if selected_tokens[0] == selected_tokens[1]:
+			return false
+		else:
+			if player_token_count == 8:
+				return false
+			else:
+				return true
+				
+	if len(selected_tokens) == 3:
+		return false
+		
 
 func can_purchase_card(card: CardDTO, player_state: PlayerState):
 	# Calculate total tokens owned through card discounts and tokens
 	var card_cost = card.cost
 	var cost = {}
-	var can_buy = true
 	var gold_needed = 0
 	for token_color in card_cost:
 		var token_cost = get_value(card_cost, token_color)  - get_value(player_state.cards, token_color)
 		if token_cost > 0:
 			if token_cost - get_value(player_state.tokens, token_color) <= 0:
-				cost[token_color] = get_value(player_state.tokens, token_color) - token_cost
+				var current_cost = get_value(player_state.tokens, token_color) - token_cost
+				cost[token_color] = current_cost
 			else:
-				can_buy = false
+				cost[token_color] = get_value(player_state.tokens, token_color)
+				gold_needed += token_cost - get_value(player_state.tokens, token_color)
+				
+	var gold_tokens_owned = get_value(player_state.tokens, Constants.token_colors[0])
+	
+	if gold_needed == 0:
+		cost['can_purchase'] = true
+	elif gold_tokens_owned >= gold_needed:
+		cost[Constants.token_colors[0]] = gold_needed
+		cost['can_purchase'] = true
+	elif gold_tokens_owned < gold_needed:
+		cost['can_purchase'] = false
+		
 	
 func get_value(dictionary, key):
 	if key in dictionary:

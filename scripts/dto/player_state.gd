@@ -10,3 +10,9 @@ func init_from_json(data):
 	tokens = data['tokens']
 	reserved_cards = data['reserved_cards']
 	nobles = data['nobles']
+
+func get_token_count():
+	var num_tokens = 0
+	for token in tokens:
+		num_tokens += tokens[token]
+	return num_tokens

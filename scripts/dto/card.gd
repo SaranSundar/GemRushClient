@@ -2,8 +2,8 @@ class_name CardDTO extends Reference
 
 
 var points: int
-var tier: Tier
-var color: CardColor
+var tier: String#Tier
+var color: String#CardColor
 var cost: Dictionary
 
 
