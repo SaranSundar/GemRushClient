@@ -21,8 +21,8 @@ load_path = "res://.import/gold_tokens.png-758b7757784976de716d9cf3e28e5b92.stex
 flags = 4
 load_path = "res://.import/small_3.png-59abbe2deedac50589c510f33755f902.stex"
 
-[sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 80, 67.5 )
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 73.5, 68.5 )
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 83, 71.5 )
@@ -145,8 +145,8 @@ offset = Vector2( 380, -56 )
 sprite_name = "gold_tokens"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/GoldTokens/Area2D"]
-position = Vector2( -10, -0.5 )
-shape = SubResource( 31 )
+position = Vector2( -12.5, -1.5 )
+shape = SubResource( 36 )
 
 [node name="BlackTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1705, 284 )
@@ -381,7 +381,6 @@ sprite_name = "cancel1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel1/Area2D"]
 position = Vector2( 95.125, 905.5 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 27 )
 
 [node name="Cancel2" type="Sprite" parent="Selection"]
@@ -396,7 +395,6 @@ sprite_name = "cancel2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel2/Area2D"]
 position = Vector2( 95.125, 905.5 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 27 )
 
 [node name="Cancel3" type="Sprite" parent="Selection"]
@@ -411,7 +409,6 @@ sprite_name = "cancel3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel3/Area2D"]
 position = Vector2( 95.125, 905.5 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 27 )
 
 [node name="BlueToken" type="Sprite" parent="Selection"]
