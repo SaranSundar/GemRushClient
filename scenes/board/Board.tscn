@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -7,19 +7,25 @@
 [ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
 [ext_resource path="res://assets/card/red_token.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/wonderbar.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/board/ClickableSprite.gd" type="Script" id=8]
+[ext_resource path="res://scenes/utils/clickable_sprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
 [ext_resource path="res://scenes/board/PlayerStats.tscn" type="PackedScene" id=26]
 
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/gold_tokens.png-758b7757784976de716d9cf3e28e5b92.stex"
+
 [sub_resource type="StreamTexture" id=2]
 flags = 4
 load_path = "res://.import/small_3.png-59abbe2deedac50589c510f33755f902.stex"
 
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/gold_tokens.png-758b7757784976de716d9cf3e28e5b92.stex"
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 80, 67.5 )
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 83, 71.5 )
 
 [sub_resource type="StreamTexture" id=5]
 flags = 4
@@ -29,6 +35,9 @@ load_path = "res://.import/red_tokens.png-e575259e41ae0080842bc581c3df16bb.stex"
 flags = 4
 load_path = "res://.import/small_10.png-d4f3cf38f9b42936e6e7a419b6fd88ac.stex"
 
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 90.5, 66.5 )
+
 [sub_resource type="StreamTexture" id=7]
 flags = 4
 load_path = "res://.import/green_tokens.png-fdd4809f8149a0863e6c695a9009ee64.stex"
@@ -36,6 +45,9 @@ load_path = "res://.import/green_tokens.png-fdd4809f8149a0863e6c695a9009ee64.ste
 [sub_resource type="StreamTexture" id=8]
 flags = 4
 load_path = "res://.import/small_4.png-b0c7eedfff0b11ab406d282a4a15917f.stex"
+
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 81, 63 )
 
 [sub_resource type="StreamTexture" id=9]
 flags = 4
@@ -45,6 +57,9 @@ load_path = "res://.import/blue_tokens.png-d2897eae3a71775fc9692c20547be187.stex
 flags = 4
 load_path = "res://.import/small_1.png-3138600a1ff57fa3e518660b197a207e.stex"
 
+[sub_resource type="RectangleShape2D" id=34]
+extents = Vector2( 71, 61 )
+
 [sub_resource type="StreamTexture" id=11]
 flags = 4
 load_path = "res://.import/white_tokens.png-8801da8180ef05d6b06a7a2e8cc42ac5.stex"
@@ -52,6 +67,9 @@ load_path = "res://.import/white_tokens.png-8801da8180ef05d6b06a7a2e8cc42ac5.ste
 [sub_resource type="StreamTexture" id=12]
 flags = 4
 load_path = "res://.import/small_8.png-42de97d31825a87f50d3dce896f4fd32.stex"
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 77.5, 70 )
 
 [sub_resource type="StreamTexture" id=15]
 flags = 4
@@ -101,6 +119,9 @@ load_path = "res://.import/selection.jpeg-5693a168b9988778a91a26dcdb76c9e5.stex"
 flags = 4
 load_path = "res://.import/cancel.png-ab4f0a23e2dae667cbb2bc0ab7383bcc.stex"
 
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 27.875, 23.5 )
+
 [sub_resource type="DynamicFont" id=26]
 size = 42
 font_data = ExtResource( 7 )
@@ -111,67 +132,97 @@ script = ExtResource( 2 )
 [node name="Bank" type="Node2D" parent="."]
 position = Vector2( 96, 7 )
 
-[node name="BlackTokens" type="Sprite" parent="Bank"]
-position = Vector2( 1705, 284 )
-texture = ExtResource( 5 )
-script = ExtResource( 8 )
-sprite_name = "BLACK"
-
-[node name="small" type="Sprite" parent="Bank/BlackTokens"]
-position = Vector2( -456, 114 )
-texture = SubResource( 2 )
-offset = Vector2( 380, -56 )
-
 [node name="GoldTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1702, 136 )
 texture = SubResource( 1 )
-script = ExtResource( 8 )
-sprite_name = "GOLD"
 
 [node name="small" type="Sprite" parent="Bank/GoldTokens"]
 position = Vector2( -453, 105 )
 texture = SubResource( 2 )
 offset = Vector2( 380, -56 )
 
+[node name="Area2D" parent="Bank/GoldTokens" instance=ExtResource( 9 )]
+sprite_name = "gold_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/GoldTokens/Area2D"]
+position = Vector2( -10, -0.5 )
+shape = SubResource( 31 )
+
+[node name="BlackTokens" type="Sprite" parent="Bank"]
+position = Vector2( 1705, 284 )
+texture = ExtResource( 5 )
+
+[node name="small" type="Sprite" parent="Bank/BlackTokens"]
+position = Vector2( -456, 114 )
+texture = SubResource( 2 )
+offset = Vector2( 380, -56 )
+
+[node name="Area2D" parent="Bank/BlackTokens" instance=ExtResource( 9 )]
+sprite_name = "black_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/BlackTokens/Area2D"]
+position = Vector2( -9, 0.5 )
+shape = SubResource( 32 )
+
 [node name="RedTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1706, 424 )
 texture = SubResource( 5 )
-script = ExtResource( 8 )
-sprite_name = "RED"
 
 [node name="small" type="Sprite" parent="Bank/RedTokens"]
 position = Vector2( -89, 40 )
 texture = SubResource( 6 )
 
+[node name="Area2D" parent="Bank/RedTokens" instance=ExtResource( 9 )]
+sprite_name = "red_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/RedTokens/Area2D"]
+position = Vector2( -25.5, 0.5 )
+shape = SubResource( 30 )
+
 [node name="GreenTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1698, 572 )
 texture = SubResource( 7 )
-script = ExtResource( 8 )
-sprite_name = "GREEN"
 
 [node name="small" type="Sprite" parent="Bank/GreenTokens"]
 position = Vector2( -81, 44 )
 texture = SubResource( 8 )
 
+[node name="Area2D" parent="Bank/GreenTokens" instance=ExtResource( 9 )]
+sprite_name = "green_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/GreenTokens/Area2D"]
+position = Vector2( -15, -1 )
+shape = SubResource( 33 )
+
 [node name="BlueTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1705, 706 )
 texture = SubResource( 9 )
-script = ExtResource( 8 )
-sprite_name = "BLUE"
 
 [node name="small" type="Sprite" parent="Bank/BlueTokens"]
 position = Vector2( -71, 38 )
 texture = SubResource( 10 )
 
+[node name="Area2D" parent="Bank/BlueTokens" instance=ExtResource( 9 )]
+sprite_name = "blue_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/BlueTokens/Area2D"]
+position = Vector2( -12, -1 )
+shape = SubResource( 34 )
+
 [node name="WhiteTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1710, 840 )
 texture = SubResource( 11 )
-script = ExtResource( 8 )
-sprite_name = "WHITE"
 
 [node name="small" type="Sprite" parent="Bank/WhiteTokens"]
 position = Vector2( -76, 48 )
 texture = SubResource( 12 )
+
+[node name="Area2D" parent="Bank/WhiteTokens" instance=ExtResource( 9 )]
+sprite_name = "white_tokens"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/WhiteTokens/Area2D"]
+position = Vector2( -13.5, 0 )
+shape = SubResource( 35 )
 
 [node name="PlayerInventory" type="Node2D" parent="."]
 position = Vector2( 76, 53 )
@@ -285,30 +336,30 @@ position = Vector2( 547, -27 )
 [node name="YELLOW" type="Node2D" parent="Deck"]
 
 [node name="Card" parent="Deck/YELLOW" instance=ExtResource( 1 )]
-position = Vector2( -31, 250 )
+position = Vector2( -31, 235 )
 
 [node name="Card2" parent="Deck/YELLOW" instance=ExtResource( 1 )]
-position = Vector2( 158, 250 )
+position = Vector2( 158, 235 )
 
 [node name="Card3" parent="Deck/YELLOW" instance=ExtResource( 1 )]
-position = Vector2( 351, 250 )
+position = Vector2( 351, 235 )
 
 [node name="Card4" parent="Deck/YELLOW" instance=ExtResource( 1 )]
-position = Vector2( 547, 250 )
+position = Vector2( 547, 235 )
 
 [node name="GREEN" type="Node2D" parent="Deck"]
 
 [node name="Card" parent="Deck/GREEN" instance=ExtResource( 1 )]
-position = Vector2( -31, 250 )
+position = Vector2( -31, 500 )
 
 [node name="Card2" parent="Deck/GREEN" instance=ExtResource( 1 )]
-position = Vector2( 158, 250 )
+position = Vector2( 158, 500 )
 
 [node name="Card3" parent="Deck/GREEN" instance=ExtResource( 1 )]
-position = Vector2( 351, 250 )
+position = Vector2( 351, 500 )
 
 [node name="Card4" parent="Deck/GREEN" instance=ExtResource( 1 )]
-position = Vector2( 547, 250 )
+position = Vector2( 547, 500 )
 
 [node name="Selection" type="Node2D" parent="."]
 position = Vector2( 4, 397 )
@@ -323,15 +374,45 @@ position = Vector2( 91, 508 )
 scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
+[node name="Area2D" parent="Selection/Cancel1" instance=ExtResource( 9 )]
+position = Vector2( -856.342, -9392.44 )
+scale = Vector2( 9.01412, 10.3784 )
+sprite_name = "cancel1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel1/Area2D"]
+position = Vector2( 95.125, 905.5 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 27 )
+
 [node name="Cancel2" type="Sprite" parent="Selection"]
-position = Vector2( 198, 511 )
-scale = Vector2( 0.102865, 0.0950521 )
+position = Vector2( 200, 508 )
+scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
+[node name="Area2D" parent="Selection/Cancel2" instance=ExtResource( 9 )]
+position = Vector2( -856.342, -9392.44 )
+scale = Vector2( 9.01412, 10.3784 )
+sprite_name = "cancel2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel2/Area2D"]
+position = Vector2( 95.125, 905.5 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 27 )
+
 [node name="Cancel3" type="Sprite" parent="Selection"]
-position = Vector2( 303, 514 )
-scale = Vector2( 0.103646, 0.101563 )
+position = Vector2( 310, 508 )
+scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
+
+[node name="Area2D" parent="Selection/Cancel3" instance=ExtResource( 9 )]
+position = Vector2( -856.342, -9392.44 )
+scale = Vector2( 9.01412, 10.3784 )
+sprite_name = "cancel3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel3/Area2D"]
+position = Vector2( 95.125, 905.5 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 27 )
 
 [node name="BlueToken" type="Sprite" parent="Selection"]
 position = Vector2( 198, 578 )

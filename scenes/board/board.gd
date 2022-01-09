@@ -18,11 +18,30 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	player_stats_hud = $PlayerStatsHUD
 	player_inventory = $PlayerInventory
 	deck = $Deck
+	setup_clickable_sprites()
 	init_bank()
 	update_player_stats()
 	update_bank()
 	update_player_inventory()
 	update_board()
+
+func setup_clickable_sprites():
+	$Selection/Cancel1/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Selection/Cancel2/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Selection/Cancel3/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/GoldTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/BlackTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/RedTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/GreenTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/BlueTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+	$Bank/WhiteTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+
+func received_sprite_click(sprite_name):
+	print(sprite_name)
+
+func received_card_click(card_dto: CardDTO):
+	print(card_dto.color)
+	print(card_dto.cost)
 
 func setup_on_click_for_bank():
 	pass
@@ -43,6 +62,7 @@ func update_board():
 			card_dto.init_from_json(card_json)
 			var card_scene = CardScene.instance()
 			card_scene.init_from_json(card_dto)
+			card_scene.connect("clicked_card", self, "received_card_click")
 			card_scene.global_position.x = (i * x_spacing) + offset_x
 			card_scene.global_position.y = (r * y_spacing) + offset_y
 			deck_tier.add_child(card_scene)

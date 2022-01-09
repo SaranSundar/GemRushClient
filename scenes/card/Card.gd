@@ -8,6 +8,13 @@ var gem: Sprite
 var points: Sprite
 var costs: Array
 
+signal clicked_card(card_data)
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		emit_signal("clicked_card", card_dto)
+
+
 func init_from_json(cardDTO: CardDTO):
 	card_dto = cardDTO
 	base = $base
