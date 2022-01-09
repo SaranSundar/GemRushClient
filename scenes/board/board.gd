@@ -4,6 +4,7 @@ var room: RoomDTO
 var game_state: GameState
 var player_stats_hud: Node2D
 var PlayerStatsScene = preload("res://scenes/board/PlayerStats.tscn")
+var CardScene = preload("res://scenes/card/Card.tscn")
 var bank_node: Node2D
 var player_inventory: Node2D
 var host_player: Player
@@ -24,8 +25,27 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	
 func update_board():
 	var board = game_state.deck.board
-	var green_tier = deck.get_node("GreenTier")
-	Constants.delete_children(green_tier)
+	var x_spacing = 189
+	var y_spacing = 250
+	var offset_x = 500
+	var offset_y = 50
+	var r = 0
+	for deck_tier in deck.get_children():
+		print(deck_tier.name)
+		Constants.delete_children(deck_tier)
+		var i = 0
+		for card_json in board[deck_tier.name]:
+			var card_dto = CardDTO.new()
+			card_dto.init_from_json(card_json)
+			var card_scene = CardScene.instance()
+			card_scene.init_from_json(card_dto)
+			card_scene.global_position.x = (i * x_spacing) + offset_x
+			card_scene.global_position.y = (r * y_spacing) + offset_y
+			deck_tier.add_child(card_scene)
+			i += 1
+		r += 1
+		
+	
 
 func update_valid_selections():
 	var player_states = game_state.player_states
@@ -86,7 +106,7 @@ func can_purchase_card(card: CardDTO, player_state: PlayerState):
 				cost[token_color] = get_value(player_state.tokens, token_color)
 				gold_needed += token_cost - get_value(player_state.tokens, token_color)
 				
-	var gold_tokens_owned = get_value(player_state.tokens, Constants.token_colors[0])
+	var gold_tokens_owned = get_value(player_state.tokens, TokenColor.GOLD)
 	
 	if gold_needed == 0:
 		cost['can_purchase'] = true

@@ -32,7 +32,7 @@ texture = ExtResource( 3 )
 position = Vector2( 36, 191 )
 texture = ExtResource( 11 )
 
-[node name="cost1_tokens" type="Sprite" parent="cost1_base"]
+[node name="cost" type="Sprite" parent="cost1_base"]
 position = Vector2( -1, 0 )
 texture = ExtResource( 9 )
 
@@ -40,19 +40,19 @@ texture = ExtResource( 9 )
 position = Vector2( 37, 132 )
 texture = ExtResource( 5 )
 
-[node name="cost2_tokens" type="Sprite" parent="cost2_base"]
+[node name="cost" type="Sprite" parent="cost2_base"]
 texture = ExtResource( 7 )
 
 [node name="cost3_base" type="Sprite" parent="."]
 position = Vector2( 94, 193 )
 texture = ExtResource( 12 )
 
-[node name="cost3_tokens" type="Sprite" parent="cost3_base"]
+[node name="cost" type="Sprite" parent="cost3_base"]
 texture = ExtResource( 10 )
 
 [node name="cost4_base" type="Sprite" parent="."]
 position = Vector2( 95, 133 )
 texture = ExtResource( 2 )
 
-[node name="cost4_tokens" type="Sprite" parent="cost4_base"]
+[node name="cost" type="Sprite" parent="cost4_base"]
 texture = ExtResource( 8 )
