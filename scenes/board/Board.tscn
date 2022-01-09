@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
 [ext_resource path="res://assets/card/red_token.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/wonderbar.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/board/ClickableSprite.gd" type="Script" id=8]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
@@ -113,6 +114,8 @@ position = Vector2( 96, 7 )
 [node name="BlackTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1705, 284 )
 texture = ExtResource( 5 )
+script = ExtResource( 8 )
+sprite_name = "BLACK"
 
 [node name="small" type="Sprite" parent="Bank/BlackTokens"]
 position = Vector2( -456, 114 )
@@ -122,6 +125,8 @@ offset = Vector2( 380, -56 )
 [node name="GoldTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1702, 136 )
 texture = SubResource( 1 )
+script = ExtResource( 8 )
+sprite_name = "GOLD"
 
 [node name="small" type="Sprite" parent="Bank/GoldTokens"]
 position = Vector2( -453, 105 )
@@ -131,6 +136,8 @@ offset = Vector2( 380, -56 )
 [node name="RedTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1706, 424 )
 texture = SubResource( 5 )
+script = ExtResource( 8 )
+sprite_name = "RED"
 
 [node name="small" type="Sprite" parent="Bank/RedTokens"]
 position = Vector2( -89, 40 )
@@ -139,6 +146,8 @@ texture = SubResource( 6 )
 [node name="GreenTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1698, 572 )
 texture = SubResource( 7 )
+script = ExtResource( 8 )
+sprite_name = "GREEN"
 
 [node name="small" type="Sprite" parent="Bank/GreenTokens"]
 position = Vector2( -81, 44 )
@@ -147,6 +156,8 @@ texture = SubResource( 8 )
 [node name="BlueTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1705, 706 )
 texture = SubResource( 9 )
+script = ExtResource( 8 )
+sprite_name = "BLUE"
 
 [node name="small" type="Sprite" parent="Bank/BlueTokens"]
 position = Vector2( -71, 38 )
@@ -155,6 +166,8 @@ texture = SubResource( 10 )
 [node name="WhiteTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1710, 840 )
 texture = SubResource( 11 )
+script = ExtResource( 8 )
+sprite_name = "WHITE"
 
 [node name="small" type="Sprite" parent="Bank/WhiteTokens"]
 position = Vector2( -76, 48 )

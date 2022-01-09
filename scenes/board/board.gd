@@ -18,10 +18,14 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	player_stats_hud = $PlayerStatsHUD
 	player_inventory = $PlayerInventory
 	deck = $Deck
+	init_bank()
 	update_player_stats()
 	update_bank()
 	update_player_inventory()
 	update_board()
+
+func setup_on_click_for_bank():
+	pass
 	
 func update_board():
 	var board = game_state.deck.board
@@ -122,6 +126,14 @@ func get_value(dictionary, key):
 		return dictionary[key]
 	else:
 		return 0
+
+func init_bank():
+	var bank_node = $Bank
+	for token_sprite in bank_node.get_children():
+		token_sprite.connect("clicked_sprite", self, "tokens_clicked")
+
+func tokens_clicked(token_name):
+	print(token_name)
 
 func update_bank():
 	var token_colors = Constants.token_colors
