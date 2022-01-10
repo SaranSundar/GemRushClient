@@ -95,6 +95,8 @@ func received_tokens_click(sprite_name):
 		return
 	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
 		return
+	elif sprite_name == TokenColor.GOLD and current_game_state != GameState.MY_TURN:
+		return
 	var player_states = game_state.player_states
 	var player_state: PlayerState = player_states[host_player.id]
 	#selected_tokens, new_token, player_state: PlayerState
@@ -179,7 +181,7 @@ func can_purchase_token(selected_tokens, new_token, player_state: PlayerState):
 			return true
 			
 	if len(selected_tokens) == 2:
-		if selected_tokens[0] == selected_tokens[1]:
+		if selected_tokens[0] == selected_tokens[1] or new_token in selected_tokens:
 			return false
 		else:
 			if player_token_count == 8:
