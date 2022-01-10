@@ -9,6 +9,18 @@ var bank_node: Node2D
 var player_inventory: Node2D
 var host_player: Player
 var deck: Node2D
+var selection = []
+var selection_node: Node2D
+
+enum GameState {
+	NOT_MY_TURN,
+	MY_TURN,
+	GOLD_TOKEN_SELECTED,
+	TOKENS_SELECTED,
+	CARD_SELECTED
+}
+
+var current_game_state = GameState.NOT_MY_TURN
 
 func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	self.room = room
@@ -18,6 +30,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	player_stats_hud = $PlayerStatsHUD
 	player_inventory = $PlayerInventory
 	deck = $Deck
+	selection_node = $Selection
 	setup_clickable_sprites()
 	init_bank()
 	update_player_stats()
@@ -25,26 +38,89 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	update_player_inventory()
 	update_board()
 
-func setup_clickable_sprites():
-	$Selection/Cancel1/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Selection/Cancel2/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Selection/Cancel3/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/GoldTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/BlackTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/RedTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/GreenTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/BlueTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
-	$Bank/WhiteTokens/Area2D.connect("clicked_sprite", self, "received_sprite_click")
+func update_game_state():
+	if current_game_state == GameState.NOT_MY_TURN:
+		if game_state.turn_order[game_state.turn_number].id == host_player.id:
+			current_game_state = GameState.MY_TURN
 
-func received_sprite_click(sprite_name):
+func _process(delta):
+	update_game_state()
+	update_selection()
+
+func update_selection():
+	if current_game_state == GameState.NOT_MY_TURN or current_game_state == GameState.MY_TURN:
+		for i in range(1, 4):
+			var token_node = selection_node.get_node("token" + str(i))
+			var cancel_node = selection_node.get_node("cancel" + str(i))
+			token_node.visible = false
+			cancel_node.visible = false
+	
+	elif current_game_state == GameState.TOKENS_SELECTED:
+		for i in range(1, 4):
+			var token_node = selection_node.get_node("token" + str(i))
+			var cancel_node = selection_node.get_node("cancel" + str(i))
+			token_node.visible = false
+			cancel_node.visible = false
+			if i - 1 < len(selection):
+				var token_color: String = selection[i-1]
+				token_node.visible = true
+				cancel_node.visible = true
+				token_node.texture = load("res://assets/card/" + token_color.to_lower() + "_token.png")
+	
+	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		var token_node = selection_node.get_node("token1")
+		var cancel_node = selection_node.get_node("cancel1")
+		token_node.visible = true
+		cancel_node.visible = true
+		token_node.texture = load("res://assets/card/gold_token.png")
+			
+	
+
+func setup_clickable_sprites():
+	$Selection/cancel1/Area2D.connect("clicked_sprite", self, "received_cancel_click")
+	$Selection/cancel2/Area2D.connect("clicked_sprite", self, "received_cancel_click")
+	$Selection/cancel3/Area2D.connect("clicked_sprite", self, "received_cancel_click")
+	$Bank/GoldTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	$Bank/BlackTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	$Bank/RedTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	$Bank/GreenTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	$Bank/BlueTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	$Bank/WhiteTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+
+func received_tokens_click(sprite_name):
+	print("CGS before: " + str(current_game_state))
+	if current_game_state == GameState.NOT_MY_TURN:
+		return
+	elif current_game_state == GameState.CARD_SELECTED:
+		return
+	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		return
+	var player_states = game_state.player_states
+	var player_state: PlayerState = player_states[host_player.id]
+	#selected_tokens, new_token, player_state: PlayerState
+	if can_purchase_token(selection, sprite_name, player_state):
+		selection.append(sprite_name)
+	
+	if sprite_name == TokenColor.GOLD:
+		current_game_state = GameState.GOLD_TOKEN_SELECTED
+	else:
+		current_game_state = GameState.TOKENS_SELECTED
+	
+	print("CGS after: " + str(current_game_state))
 	print(sprite_name)
+	
+
+func received_cancel_click(selection_index_str):
+	var selection_index = int(selection_index_str)
+	selection.remove(selection_index)
+	if len(selection) == 0:
+		current_game_state = GameState.MY_TURN
+	print("Index is " + selection_index_str)
+	print(selection)
 
 func received_card_click(card_dto: CardDTO):
 	print(card_dto.color)
 	print(card_dto.cost)
-
-func setup_on_click_for_bank():
-	pass
 	
 func update_board():
 	var board = game_state.deck.board
@@ -203,3 +279,11 @@ func update_player_stats():
 		player_stats.init(player.id, player_state)
 	
 
+
+
+func _on_EndTurn_pressed():
+	pass # Replace with function body.
+
+
+func _on_SkipTurn_pressed():
+	pass # Replace with function body.

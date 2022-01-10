@@ -142,7 +142,7 @@ texture = SubResource( 2 )
 offset = Vector2( 380, -56 )
 
 [node name="Area2D" parent="Bank/GoldTokens" instance=ExtResource( 9 )]
-sprite_name = "gold_tokens"
+sprite_name = "GOLD"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/GoldTokens/Area2D"]
 position = Vector2( -12.5, -1.5 )
@@ -158,7 +158,7 @@ texture = SubResource( 2 )
 offset = Vector2( 380, -56 )
 
 [node name="Area2D" parent="Bank/BlackTokens" instance=ExtResource( 9 )]
-sprite_name = "black_tokens"
+sprite_name = "BLACK"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/BlackTokens/Area2D"]
 position = Vector2( -9, 0.5 )
@@ -173,7 +173,7 @@ position = Vector2( -89, 40 )
 texture = SubResource( 6 )
 
 [node name="Area2D" parent="Bank/RedTokens" instance=ExtResource( 9 )]
-sprite_name = "red_tokens"
+sprite_name = "RED"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/RedTokens/Area2D"]
 position = Vector2( -25.5, 0.5 )
@@ -188,7 +188,7 @@ position = Vector2( -81, 44 )
 texture = SubResource( 8 )
 
 [node name="Area2D" parent="Bank/GreenTokens" instance=ExtResource( 9 )]
-sprite_name = "green_tokens"
+sprite_name = "GREEN"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/GreenTokens/Area2D"]
 position = Vector2( -15, -1 )
@@ -203,7 +203,7 @@ position = Vector2( -71, 38 )
 texture = SubResource( 10 )
 
 [node name="Area2D" parent="Bank/BlueTokens" instance=ExtResource( 9 )]
-sprite_name = "blue_tokens"
+sprite_name = "BLUE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/BlueTokens/Area2D"]
 position = Vector2( -12, -1 )
@@ -218,7 +218,7 @@ position = Vector2( -76, 48 )
 texture = SubResource( 12 )
 
 [node name="Area2D" parent="Bank/WhiteTokens" instance=ExtResource( 9 )]
-sprite_name = "white_tokens"
+sprite_name = "WHITE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bank/WhiteTokens/Area2D"]
 position = Vector2( -13.5, 0 )
@@ -369,59 +369,59 @@ position = Vector2( 195.5, 574 )
 scale = Vector2( 0.658333, 0.485981 )
 texture = SubResource( 24 )
 
-[node name="Cancel1" type="Sprite" parent="Selection"]
+[node name="cancel1" type="Sprite" parent="Selection"]
 position = Vector2( 91, 508 )
 scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
-[node name="Area2D" parent="Selection/Cancel1" instance=ExtResource( 9 )]
+[node name="Area2D" parent="Selection/cancel1" instance=ExtResource( 9 )]
 position = Vector2( -856.342, -9392.44 )
 scale = Vector2( 9.01412, 10.3784 )
-sprite_name = "cancel1"
+sprite_name = "0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel1/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/cancel1/Area2D"]
 position = Vector2( 95.125, 905.5 )
 shape = SubResource( 27 )
 
-[node name="Cancel2" type="Sprite" parent="Selection"]
+[node name="cancel2" type="Sprite" parent="Selection"]
 position = Vector2( 200, 508 )
 scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
-[node name="Area2D" parent="Selection/Cancel2" instance=ExtResource( 9 )]
+[node name="Area2D" parent="Selection/cancel2" instance=ExtResource( 9 )]
 position = Vector2( -856.342, -9392.44 )
 scale = Vector2( 9.01412, 10.3784 )
-sprite_name = "cancel2"
+sprite_name = "1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel2/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/cancel2/Area2D"]
 position = Vector2( 95.125, 905.5 )
 shape = SubResource( 27 )
 
-[node name="Cancel3" type="Sprite" parent="Selection"]
+[node name="cancel3" type="Sprite" parent="Selection"]
 position = Vector2( 310, 508 )
 scale = Vector2( 0.110937, 0.0963541 )
 texture = SubResource( 25 )
 
-[node name="Area2D" parent="Selection/Cancel3" instance=ExtResource( 9 )]
+[node name="Area2D" parent="Selection/cancel3" instance=ExtResource( 9 )]
 position = Vector2( -856.342, -9392.44 )
 scale = Vector2( 9.01412, 10.3784 )
-sprite_name = "cancel3"
+sprite_name = "2"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/Cancel3/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection/cancel3/Area2D"]
 position = Vector2( 95.125, 905.5 )
 shape = SubResource( 27 )
 
-[node name="BlueToken" type="Sprite" parent="Selection"]
+[node name="token1" type="Sprite" parent="Selection"]
+position = Vector2( 80, 580 )
+texture = ExtResource( 6 )
+
+[node name="token2" type="Sprite" parent="Selection"]
 position = Vector2( 198, 578 )
 texture = ExtResource( 4 )
 
-[node name="GreenToken" type="Sprite" parent="Selection"]
+[node name="token3" type="Sprite" parent="Selection"]
 position = Vector2( 314, 580 )
 texture = ExtResource( 3 )
-
-[node name="RedToken" type="Sprite" parent="Selection"]
-position = Vector2( 80, 580 )
-texture = ExtResource( 6 )
 
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
 position = Vector2( 0, 24 )
@@ -462,3 +462,6 @@ text = "Skip Turn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
+[connection signal="pressed" from="Control/SkipTurn" to="." method="_on_SkipTurn_pressed"]
