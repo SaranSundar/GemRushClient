@@ -48,6 +48,8 @@ func _process(delta):
 	update_selection()
 
 func update_selection():
+	var card_node = selection_node.get_node("card")
+	card_node.visible = false
 	if current_game_state == GameState.NOT_MY_TURN or current_game_state == GameState.MY_TURN:
 		for i in range(1, 4):
 			var token_node = selection_node.get_node("token" + str(i))
@@ -73,6 +75,17 @@ func update_selection():
 		token_node.visible = true
 		cancel_node.visible = true
 		token_node.texture = load("res://assets/card/gold_token.png")
+		if len(selection) == 2:
+			card_node.init_from_json(selection[1])
+			card_node.visible = true
+	
+	elif current_game_state == GameState.CARD_SELECTED:
+		var token_node = selection_node.get_node("token1")
+		var cancel_node = selection_node.get_node("cancel1")
+		token_node.visible = false
+		cancel_node.visible = true
+		card_node.init_from_json(selection[0])
+		card_node.visible = true
 			
 	
 
@@ -114,7 +127,10 @@ func received_tokens_click(sprite_name):
 
 func received_cancel_click(selection_index_str):
 	var selection_index = int(selection_index_str)
-	selection.remove(selection_index)
+	if current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		selection = []
+	else:
+		selection.remove(selection_index)
 	if len(selection) == 0:
 		current_game_state = GameState.MY_TURN
 	print("Index is " + selection_index_str)
@@ -123,6 +139,12 @@ func received_cancel_click(selection_index_str):
 func received_card_click(card_dto: CardDTO):
 	print(card_dto.color)
 	print(card_dto.cost)
+	if current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		if len(selection) == 1:
+			selection.append(card_dto)
+	elif current_game_state == GameState.MY_TURN:
+		selection.append(card_dto)
+		current_game_state = GameState.CARD_SELECTED
 	
 func update_board():
 	var board = game_state.deck.board

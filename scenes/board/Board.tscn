@@ -423,6 +423,9 @@ texture = ExtResource( 4 )
 position = Vector2( 314, 580 )
 texture = ExtResource( 3 )
 
+[node name="card" parent="Selection" instance=ExtResource( 1 )]
+position = Vector2( 131, 434 )
+
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
 position = Vector2( 0, 24 )
 
