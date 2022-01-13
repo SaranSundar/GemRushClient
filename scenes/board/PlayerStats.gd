@@ -24,7 +24,7 @@ func update_tokens(player_state: PlayerState):
 		var num_cards_owned: int = 0
 		if i != 0:
 			if token_colors[i] in player_state.cards:
-				num_cards_owned = player_state.cards[token_colors[i]]
+				num_cards_owned = len(player_state.cards[token_colors[i]])
 			gems[i].get_node("big").visible = num_cards_owned > 0
 			gems[i].get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
 		if num_cards_owned == 0 and num_tokens_owned == 0:

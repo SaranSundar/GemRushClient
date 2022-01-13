@@ -11,6 +11,8 @@ var host_player: Player
 var deck: Node2D
 var selection = []
 var selection_node: Node2D
+var http_client: HttpRequestClient
+var end_turn_button: Button
 
 enum GameState {
 	NOT_MY_TURN,
@@ -29,8 +31,12 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	bank_node = $Bank
 	player_stats_hud = $PlayerStatsHUD
 	player_inventory = $PlayerInventory
+	end_turn_button = $Control/EndTurn
 	deck = $Deck
 	selection_node = $Selection
+	http_client = HttpRequestClient.new()
+	add_child(http_client)
+	http_client.connect_game_state_created_to_game_state_received(self)
 	setup_clickable_sprites()
 	init_bank()
 	update_player_stats()
@@ -38,14 +44,34 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	update_player_inventory()
 	update_board()
 
+func game_state_received(game_state_dto):
+	print("Game State received")
+	game_state = game_state_dto
+	print(game_state.player_states)
+	for key in game_state.player_states:
+		print(game_state.player_states[key].data)
+	selection = []
+	current_game_state = GameState.NOT_MY_TURN
+	var game_player_id = game_state.turn_order[game_state.turn_number].id
+	print("Game player id " + str(game_player_id))
+	print("Current player id " + str(host_player.id))
+	update_board()
+
+
 func update_game_state():
 	if current_game_state == GameState.NOT_MY_TURN:
+		end_turn_button.visible = false
 		if game_state.turn_order[game_state.turn_number].id == host_player.id:
 			current_game_state = GameState.MY_TURN
+			end_turn_button.visible = true
 
 func _process(delta):
 	update_game_state()
 	update_selection()
+	
+	update_player_stats()
+	update_bank()
+	update_player_inventory()
 
 func update_selection():
 	var card_node = selection_node.get_node("card")
@@ -114,6 +140,8 @@ func received_tokens_click(sprite_name):
 	var player_state: PlayerState = player_states[host_player.id]
 	#selected_tokens, new_token, player_state: PlayerState
 	if can_purchase_token(selection, sprite_name, player_state):
+		var bank = game_state.deck.bank
+		bank[sprite_name] -= 1
 		selection.append(sprite_name)
 	
 	if sprite_name == TokenColor.GOLD:
@@ -126,11 +154,16 @@ func received_tokens_click(sprite_name):
 	
 
 func received_cancel_click(selection_index_str):
+	var bank = game_state.deck.bank
 	var selection_index = int(selection_index_str)
 	if current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		bank[Constants.token_colors[0]] += 1
 		selection = []
 	else:
 		selection.remove(selection_index)
+		if current_game_state == GameState.TOKENS_SELECTED:
+			bank[selection[selection_index]] += 1
+			
 	if len(selection) == 0:
 		current_game_state = GameState.MY_TURN
 	print("Index is " + selection_index_str)
@@ -154,7 +187,6 @@ func update_board():
 	var offset_y = 50
 	var r = 0
 	for deck_tier in deck.get_children():
-		print(deck_tier.name)
 		Constants.delete_children(deck_tier)
 		var i = 0
 		for card_json in board[deck_tier.name]:
@@ -189,6 +221,13 @@ func update_valid_selections():
 		
 	
 func can_purchase_token(selected_tokens, new_token, player_state: PlayerState):
+	var bank = game_state.deck.bank
+	if bank[new_token] <= 0:
+		return false
+		
+	if bank[Constants.token_colors[0]] == 3 and new_token == "GOLD":
+		return false
+	
 	var player_token_count = player_state.get_token_count()
 	if player_token_count == 10:
 		return false
@@ -285,7 +324,7 @@ func update_player_inventory():
 		var num_cards_owned = 0
 		if i > 0:
 			if token_colors[i] in cards:
-				num_cards_owned = cards[token_colors[i]]
+				num_cards_owned = len(cards[token_colors[i]])
 			child_node.get_node("big").visible = num_cards_owned > 0
 			child_node.get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
 		
@@ -306,7 +345,45 @@ func update_player_stats():
 
 
 func _on_EndTurn_pressed():
-	pass # Replace with function body.
+	# room_id, player_id, game_state_id, end_turn_action, noble: Noble,
+	# card: Card, reserved_card: Card, tokens_returned: Array, tokens_bought: Array
+	if current_game_state == GameState.CARD_SELECTED:
+		http_client.end_turn_request.end_turn(
+			room.id,
+			host_player.id,
+			game_state.id,
+			EndTurnAction.BuyingCard,
+			null,
+			selection[0],
+			null,
+			[],
+			[]
+		)
+	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		if len(selection) == 2:
+			http_client.end_turn_request.end_turn(
+				room.id,
+				host_player.id,
+				game_state.id,
+				EndTurnAction.BuyingGoldToken,
+				null,
+				null,
+				selection[1],
+				[],
+				[selection[0]]
+			)
+	elif current_game_state == GameState.TOKENS_SELECTED:
+		http_client.end_turn_request.end_turn(
+			room.id,
+			host_player.id,
+			game_state.id,
+			EndTurnAction.Buying3DifferentTokens,
+			null,
+			null,
+			null,
+			[],
+			selection
+		)
 
 
 func _on_SkipTurn_pressed():

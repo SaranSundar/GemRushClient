@@ -225,7 +225,7 @@ position = Vector2( -13.5, 0 )
 shape = SubResource( 35 )
 
 [node name="PlayerInventory" type="Node2D" parent="."]
-position = Vector2( 76, 53 )
+position = Vector2( 76, 54 )
 
 [node name="GoldTokens" type="Sprite" parent="PlayerInventory"]
 position = Vector2( 428, 952 )
@@ -236,6 +236,22 @@ texture = SubResource( 1 )
 [node name="small" type="Sprite" parent="PlayerInventory/GoldTokens/tokens"]
 position = Vector2( -78, 48 )
 texture = SubResource( 10 )
+
+[node name="BlackCard" type="Sprite" parent="PlayerInventory"]
+position = Vector2( 585, 906 )
+texture = ExtResource( 23 )
+
+[node name="big" type="Sprite" parent="PlayerInventory/BlackCard"]
+position = Vector2( -50, -69 )
+texture = ExtResource( 17 )
+
+[node name="tokens" type="Sprite" parent="PlayerInventory/BlackCard"]
+position = Vector2( 77, 43 )
+texture = ExtResource( 5 )
+
+[node name="small" type="Sprite" parent="PlayerInventory/BlackCard/tokens"]
+position = Vector2( -73, 37 )
+texture = ExtResource( 10 )
 
 [node name="RedCard" type="Sprite" parent="PlayerInventory"]
 position = Vector2( 806, 904 )
@@ -300,22 +316,6 @@ texture = SubResource( 11 )
 [node name="small" type="Sprite" parent="PlayerInventory/WhiteCard/tokens"]
 position = Vector2( -85, 37 )
 texture = SubResource( 2 )
-
-[node name="BlackCard" type="Sprite" parent="PlayerInventory"]
-position = Vector2( 585, 906 )
-texture = ExtResource( 23 )
-
-[node name="tokens" type="Sprite" parent="PlayerInventory/BlackCard"]
-position = Vector2( 77, 43 )
-texture = ExtResource( 5 )
-
-[node name="small" type="Sprite" parent="PlayerInventory/BlackCard/tokens"]
-position = Vector2( -73, 37 )
-texture = ExtResource( 10 )
-
-[node name="big" type="Sprite" parent="PlayerInventory/BlackCard"]
-position = Vector2( -50, -69 )
-texture = ExtResource( 17 )
 
 [node name="Deck" type="Node2D" parent="."]
 
