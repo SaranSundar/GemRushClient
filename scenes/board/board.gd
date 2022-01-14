@@ -15,6 +15,8 @@ var http_client: HttpRequestClient
 var end_turn_button: Button
 var reserved_cards_node: Node2D
 
+var start_time = OS.get_ticks_msec()
+
 enum GameState {
 	NOT_MY_TURN,
 	MY_TURN,
@@ -45,6 +47,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	update_bank()
 	update_player_inventory()
 	update_board()
+	start_time = OS.get_ticks_msec()
 
 func game_state_received(game_state_dto):
 	print("Game State received")
@@ -58,6 +61,7 @@ func game_state_received(game_state_dto):
 	print("Game player id " + str(game_player_id))
 	print("Current player id " + str(host_player.id))
 	update_board()
+	start_time = OS.get_ticks_msec()
 
 
 func update_game_state():
@@ -66,10 +70,16 @@ func update_game_state():
 		if game_state.turn_order[game_state.turn_number].id == host_player.id:
 			current_game_state = GameState.MY_TURN
 			end_turn_button.visible = true
+			start_time = OS.get_ticks_msec()
 	
 	if current_game_state != GameState.NOT_MY_TURN:
 		if len(selection) == 0:
 			current_game_state = GameState.MY_TURN
+			start_time = OS.get_ticks_msec()
+
+func _on_Timer_timeout():
+	print("Calling get room")
+	http_client.get_room_request.get_room(room.id)
 
 func _process(delta):
 	update_game_state()
@@ -78,6 +88,13 @@ func _process(delta):
 	update_player_stats()
 	update_bank()
 	update_player_inventory()
+	
+	
+	if current_game_state == GameState.NOT_MY_TURN:
+		var elapsed_time = OS.get_ticks_msec() - start_time
+		if elapsed_time > 10000:
+			_on_Timer_timeout()
+			start_time = OS.get_ticks_msec()
 
 func update_selection():
 	var card_node = selection_node.get_node("card")
