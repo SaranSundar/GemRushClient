@@ -38,7 +38,6 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
 	setup_clickable_sprites()
-	init_bank()
 	update_player_stats()
 	update_bank()
 	update_player_inventory()
@@ -64,6 +63,10 @@ func update_game_state():
 		if game_state.turn_order[game_state.turn_number].id == host_player.id:
 			current_game_state = GameState.MY_TURN
 			end_turn_button.visible = true
+	
+	if current_game_state != GameState.NOT_MY_TURN:
+		if len(selection) == 0:
+			current_game_state = GameState.MY_TURN
 
 func _process(delta):
 	update_game_state()
@@ -159,11 +162,12 @@ func received_cancel_click(selection_index_str):
 	if current_game_state == GameState.GOLD_TOKEN_SELECTED:
 		bank[Constants.token_colors[0]] += 1
 		selection = []
-	else:
+	elif current_game_state == GameState.TOKENS_SELECTED:
+		bank[selection[selection_index]] += 1
 		selection.remove(selection_index)
-		if current_game_state == GameState.TOKENS_SELECTED:
-			bank[selection[selection_index]] += 1
-			
+	elif current_game_state == GameState.CARD_SELECTED:
+		selection.remove(0)
+	
 	if len(selection) == 0:
 		current_game_state = GameState.MY_TURN
 	print("Index is " + selection_index_str)
@@ -176,9 +180,14 @@ func received_card_click(card_dto: CardDTO):
 		if len(selection) == 1:
 			selection.append(card_dto)
 	elif current_game_state == GameState.MY_TURN:
-		selection.append(card_dto)
-		current_game_state = GameState.CARD_SELECTED
-	
+		var player_states = game_state.player_states
+		var player_state: PlayerState = player_states[host_player.id]
+		var player_cost = can_purchase_card(card_dto, player_state)
+		if player_cost['can_purchase']:
+			card_dto.player_cost = player_cost
+			selection.append(card_dto)
+			current_game_state = GameState.CARD_SELECTED
+		
 func update_board():
 	var board = game_state.deck.board
 	var x_spacing = 189
@@ -195,8 +204,8 @@ func update_board():
 			var card_scene = CardScene.instance()
 			card_scene.init_from_json(card_dto)
 			card_scene.connect("clicked_card", self, "received_card_click")
-			card_scene.global_position.x = (i * x_spacing) + offset_x
-			card_scene.global_position.y = (r * y_spacing) + offset_y
+			card_scene.position.x = (i * x_spacing) + offset_x
+			card_scene.position.y = (r * y_spacing) + offset_y
 			deck_tier.add_child(card_scene)
 			i += 1
 		r += 1
@@ -214,7 +223,7 @@ func update_valid_selections():
 	for card_nodes in green_tier.get_children():
 		var card: Card = card_nodes
 		var card_dto: CardDTO = card.card_dto
-		if can_purchase_card(card_dto, player_state):
+		if can_purchase_card(card_dto, player_state)['can_purchase']:
 			card.modulate = cannot_purchase_color
 		else:
 			card.modulate = no_color
@@ -222,16 +231,25 @@ func update_valid_selections():
 	
 func can_purchase_token(selected_tokens, new_token, player_state: PlayerState):
 	var bank = game_state.deck.bank
+	# If bank has no tokens left
 	if bank[new_token] <= 0:
 		return false
-		
-	if bank[Constants.token_colors[0]] == 3 and new_token == "GOLD":
-		return false
 	
+	# Can only have 3 cards reserved at once
+	if new_token == "GOLD" and len(player_state.reserved_cards) == 3:
+		return false
+		
+	
+	# Must have at least 4 tokens of a color left to grab 2 of that color
+	if len(selected_tokens) == 1:
+		if selected_tokens[0] == new_token:
+			return bank[new_token] >= 3
+	
+	# If player hand is full with 10 tokens
 	var player_token_count = player_state.get_token_count()
 	if player_token_count == 10:
 		return false
-		
+	
 	if len(selected_tokens) == 0:
 		return true
 		
@@ -260,14 +278,19 @@ func can_purchase_card(card: CardDTO, player_state: PlayerState):
 	var cost = {}
 	var gold_needed = 0
 	for token_color in card_cost:
-		var token_cost = get_value(card_cost, token_color)  - get_value(player_state.cards, token_color)
+		var card_value = get_value(card_cost, token_color)
+		var player_value = len(player_state.cards[token_color])
+		# Cost of card to player
+		var token_cost = card_value - player_value
 		if token_cost > 0:
-			if token_cost - get_value(player_state.tokens, token_color) <= 0:
-				var current_cost = get_value(player_state.tokens, token_color) - token_cost
-				cost[token_color] = current_cost
+			var player_owned_tokens = get_value(player_state.tokens, token_color)
+			if token_cost - player_owned_tokens <= 0:
+				# Player has enough or more tokens then cost of card to player
+				cost[token_color] = token_cost
 			else:
-				cost[token_color] = get_value(player_state.tokens, token_color)
-				gold_needed += token_cost - get_value(player_state.tokens, token_color)
+				# Card costs more tokens then player has
+				cost[token_color] = player_owned_tokens
+				gold_needed += token_cost - player_owned_tokens
 				
 	var gold_tokens_owned = get_value(player_state.tokens, TokenColor.GOLD)
 	
@@ -278,6 +301,8 @@ func can_purchase_card(card: CardDTO, player_state: PlayerState):
 		cost['can_purchase'] = true
 	elif gold_tokens_owned < gold_needed:
 		cost['can_purchase'] = false
+	
+	return cost
 		
 	
 func get_value(dictionary, key):
@@ -285,11 +310,6 @@ func get_value(dictionary, key):
 		return dictionary[key]
 	else:
 		return 0
-
-func init_bank():
-	var bank_node = $Bank
-	for token_sprite in bank_node.get_children():
-		token_sprite.connect("clicked_sprite", self, "tokens_clicked")
 
 func tokens_clicked(token_name):
 	print(token_name)
@@ -319,14 +339,16 @@ func update_player_inventory():
 		if token_colors[i] in tokens:
 			num_tokens_owned = tokens[token_colors[i]]
 		child_node.get_node("tokens").get_node("small").visible = num_tokens_owned > 0
-		child_node.get_node("tokens").get_node("small").texture = load("res://assets/card/small_" + str(num_tokens_owned) + ".png")
+		if num_tokens_owned > 0:
+			child_node.get_node("tokens").get_node("small").texture = load("res://assets/card/small_" + str(num_tokens_owned) + ".png")
 		
 		var num_cards_owned = 0
 		if i > 0:
 			if token_colors[i] in cards:
 				num_cards_owned = len(cards[token_colors[i]])
 			child_node.get_node("big").visible = num_cards_owned > 0
-			child_node.get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
+			if num_cards_owned > 0:
+				child_node.get_node("big").texture = load("res://assets/card/big_" + str(num_cards_owned) + ".png")
 		
 		child_node.visible = num_tokens_owned > 0 or num_cards_owned > 0
 		
@@ -342,8 +364,6 @@ func update_player_stats():
 		player_stats.init(player.id, player_state)
 	
 
-
-
 func _on_EndTurn_pressed():
 	# room_id, player_id, game_state_id, end_turn_action, noble: Noble,
 	# card: Card, reserved_card: Card, tokens_returned: Array, tokens_bought: Array
@@ -356,7 +376,7 @@ func _on_EndTurn_pressed():
 			null,
 			selection[0],
 			null,
-			[],
+			selection[0].get_tokens_returned(),
 			[]
 		)
 	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:

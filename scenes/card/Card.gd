@@ -26,7 +26,9 @@ func init_from_json(cardDTO: CardDTO):
 func update_graphics():
 	base.texture = load("res://assets/card/" +  card_dto.color.to_lower() + "_card.png")
 	gem.texture = load("res://assets/card/" +  card_dto.color.to_lower() + "_gem.png")
-	points.texture = load("res://assets/card/big_" +  str(card_dto.points) + ".png")
+	points.visible = card_dto.points > 0
+	if card_dto.points > 0:
+		points.texture = load("res://assets/card/big_" +  str(card_dto.points) + ".png")
 	var keys = card_dto.cost.keys()
 	var costs_with_values = []
 	var card_circle_index = 0
