@@ -407,12 +407,17 @@ func update_player_inventory():
 
 func update_player_stats():
 	Constants.delete_children(player_stats_hud)
+	var y_offset = 300
+	var off_set = 18
+	var i = 0
 	for p in room.players:
 		var player: Player = p
 		var player_stats: PlayerStats = PlayerStatsScene.instance()
 		player_stats_hud.add_child(player_stats)
+		player_stats.position.y = (i * y_offset) + off_set
 		var player_state: PlayerState = game_state.player_states[player.id]
 		player_stats.init(player.id, player_state)
+		i += 1
 	
 
 func _on_EndTurn_pressed():
