@@ -466,5 +466,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ReservedCards" type="Node2D" parent="."]
+position = Vector2( 1130, 0 )
+
+[node name="Card" parent="ReservedCards" instance=ExtResource( 1 )]
+position = Vector2( 200, 250 )
+
+[node name="Card2" parent="ReservedCards" instance=ExtResource( 1 )]
+position = Vector2( 200, 0 )
+
+[node name="Card3" parent="ReservedCards" instance=ExtResource( 1 )]
+position = Vector2( 400, 0 )
+
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
 [connection signal="pressed" from="Control/SkipTurn" to="." method="_on_SkipTurn_pressed"]

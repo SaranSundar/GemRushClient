@@ -13,13 +13,15 @@ var selection = []
 var selection_node: Node2D
 var http_client: HttpRequestClient
 var end_turn_button: Button
+var reserved_cards_node: Node2D
 
 enum GameState {
 	NOT_MY_TURN,
 	MY_TURN,
 	GOLD_TOKEN_SELECTED,
 	TOKENS_SELECTED,
-	CARD_SELECTED
+	CARD_SELECTED,
+	RESERVED_CARD_SELECTED
 }
 
 var current_game_state = GameState.NOT_MY_TURN
@@ -34,6 +36,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	end_turn_button = $Control/EndTurn
 	deck = $Deck
 	selection_node = $Selection
+	reserved_cards_node = $ReservedCards
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
@@ -108,7 +111,7 @@ func update_selection():
 			card_node.init_from_json(selection[1])
 			card_node.visible = true
 	
-	elif current_game_state == GameState.CARD_SELECTED:
+	elif current_game_state == GameState.CARD_SELECTED or current_game_state == GameState.RESERVED_CARD_SELECTED:
 		var token_node = selection_node.get_node("token1")
 		var cancel_node = selection_node.get_node("cancel1")
 		token_node.visible = false
@@ -167,11 +170,25 @@ func received_cancel_click(selection_index_str):
 		selection.remove(selection_index)
 	elif current_game_state == GameState.CARD_SELECTED:
 		selection.remove(0)
+	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
+		selection.remove(0)
 	
 	if len(selection) == 0:
 		current_game_state = GameState.MY_TURN
 	print("Index is " + selection_index_str)
 	print(selection)
+
+func received_reserved_card_click(card_dto: CardDTO):
+	print(card_dto.color)
+	print(card_dto.cost)
+	if current_game_state == GameState.MY_TURN:
+		var player_states = game_state.player_states
+		var player_state: PlayerState = player_states[host_player.id]
+		var player_cost = can_purchase_card(card_dto, player_state)
+		if player_cost['can_purchase']:
+			card_dto.player_cost = player_cost
+			selection.append(card_dto)
+			current_game_state = GameState.RESERVED_CARD_SELECTED
 
 func received_card_click(card_dto: CardDTO):
 	print(card_dto.color)
@@ -189,6 +206,8 @@ func received_card_click(card_dto: CardDTO):
 			current_game_state = GameState.CARD_SELECTED
 		
 func update_board():
+	var player_states = game_state.player_states
+	var player_state: PlayerState = player_states[host_player.id]
 	var board = game_state.deck.board
 	var x_spacing = 189
 	var y_spacing = 250
@@ -209,6 +228,18 @@ func update_board():
 			deck_tier.add_child(card_scene)
 			i += 1
 		r += 1
+	var i = 0
+	for reserved_card_node in reserved_cards_node.get_children():
+		var reserved_card_scene: Card = reserved_card_node
+		if i < len(player_state.reserved_cards):
+			var card_dto = CardDTO.new()
+			card_dto.init_from_json(player_state.reserved_cards[i])
+			reserved_card_scene.init_from_json(card_dto)
+			reserved_card_scene.connect("clicked_card", self, "received_reserved_card_click")
+			reserved_card_scene.visible = true
+		else:
+			reserved_card_scene.visible = false
+		i += 1
 		
 	
 
@@ -373,6 +404,18 @@ func _on_EndTurn_pressed():
 			host_player.id,
 			game_state.id,
 			EndTurnAction.BuyingCard,
+			null,
+			selection[0],
+			null,
+			selection[0].get_tokens_returned(),
+			[]
+		)
+	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
+		http_client.end_turn_request.end_turn(
+			room.id,
+			host_player.id,
+			game_state.id,
+			EndTurnAction.BuyingReservedCard,
 			null,
 			selection[0],
 			null,
