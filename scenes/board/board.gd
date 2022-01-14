@@ -447,7 +447,3 @@ func _on_EndTurn_pressed():
 			[],
 			selection
 		)
-
-
-func _on_SkipTurn_pressed():
-	pass # Replace with function body.
