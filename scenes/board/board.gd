@@ -65,6 +65,9 @@ func game_state_received(game_state_dto):
 
 
 func update_game_state():
+	if game_state.turn_order[game_state.turn_number].id != host_player.id:
+		current_game_state = GameState.NOT_MY_TURN
+	
 	if current_game_state == GameState.NOT_MY_TURN:
 		end_turn_button.visible = false
 		if game_state.turn_order[game_state.turn_number].id == host_player.id:
@@ -78,8 +81,8 @@ func update_game_state():
 			start_time = OS.get_ticks_msec()
 
 func _on_Timer_timeout():
-	print("Calling get room")
-	http_client.get_room_request.get_room(room.id)
+	print("Calling get game state")
+	http_client.get_game_state_request.get_game_state(game_state.id)
 
 func _process(delta):
 	update_game_state()
