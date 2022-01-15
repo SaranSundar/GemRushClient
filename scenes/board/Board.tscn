@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/card/black_tokens.png" type="Texture" id=5]
 [ext_resource path="res://assets/card/red_token.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/wonderbar.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/noble/Noble.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/utils/clickable_sprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
@@ -136,7 +137,7 @@ font_data = ExtResource( 7 )
 script = ExtResource( 2 )
 
 [node name="Bank" type="Node2D" parent="."]
-position = Vector2( 96, 7 )
+position = Vector2( 138, 7 )
 
 [node name="GoldTokens" type="Sprite" parent="Bank"]
 position = Vector2( 1702, 136 )
@@ -433,6 +434,9 @@ texture = ExtResource( 3 )
 [node name="card" parent="Selection" instance=ExtResource( 1 )]
 position = Vector2( 131, 434 )
 
+[node name="noble" parent="Selection" instance=ExtResource( 8 )]
+position = Vector2( 304, 450 )
+
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
 position = Vector2( 0, 24 )
 
@@ -452,10 +456,10 @@ __meta__ = {
 }
 
 [node name="EndTurn" type="Button" parent="Control"]
-margin_left = 1451.0
-margin_top = 632.0
-margin_right = 1678.0
-margin_bottom = 740.0
+margin_left = 1464.0
+margin_top = 715.0
+margin_right = 1691.0
+margin_bottom = 823.0
 custom_fonts/font = SubResource( 26 )
 text = "End Turn"
 __meta__ = {
@@ -490,5 +494,17 @@ text = "Winners Are: Saran!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Nobles" type="Node2D" parent="."]
+position = Vector2( 1400, 400 )
+
+[node name="Noble" parent="Nobles" instance=ExtResource( 8 )]
+position = Vector2( -33, 86 )
+
+[node name="Noble2" parent="Nobles" instance=ExtResource( 8 )]
+position = Vector2( 150, 85 )
+
+[node name="Noble3" parent="Nobles" instance=ExtResource( 8 )]
+position = Vector2( 145, -112 )
 
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]

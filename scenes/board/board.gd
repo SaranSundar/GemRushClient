@@ -15,6 +15,7 @@ var http_client: HttpRequestClient
 var end_turn_button: Button
 var reserved_cards_node: Node2D
 var winners_label: Label
+var nobles_node: Node2D
 
 var start_time = OS.get_ticks_msec()
 
@@ -41,6 +42,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	selection_node = $Selection
 	reserved_cards_node = $ReservedCards
 	winners_label = $Winners/Label
+	nobles_node = $Nobles
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
@@ -114,7 +116,9 @@ func _process(delta):
 
 func update_selection():
 	var card_node = selection_node.get_node("card")
+	var noble_node = selection_node.get_node("noble")
 	card_node.visible = false
+	noble_node.visible = false
 	if current_game_state == GameState.NOT_MY_TURN or current_game_state == GameState.MY_TURN:
 		for i in range(1, 4):
 			var token_node = selection_node.get_node("token" + str(i))
@@ -151,6 +155,9 @@ func update_selection():
 		cancel_node.visible = true
 		card_node.init_from_json(selection[0])
 		card_node.visible = true
+		if len(selection) == 2:
+			noble_node.init_from_json(selection[1])
+			noble_node.visible = true
 			
 	
 
@@ -202,9 +209,9 @@ func received_cancel_click(selection_index_str):
 		bank[selection[selection_index]] += 1
 		selection.remove(selection_index)
 	elif current_game_state == GameState.CARD_SELECTED:
-		selection.remove(0)
+		selection = []
 	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
-		selection.remove(0)
+		selection = []
 	
 	if len(selection) == 0:
 		current_game_state = GameState.MY_TURN
@@ -237,6 +244,20 @@ func received_card_click(card_dto: CardDTO):
 			card_dto.player_cost = player_cost
 			selection.append(card_dto)
 			current_game_state = GameState.CARD_SELECTED
+
+func received_noble_click(noble_dto: Noble):
+	print(noble_dto.cost)
+	print(noble_dto.points)
+	if current_game_state == GameState.CARD_SELECTED:
+		if can_purchase_noble(noble_dto, selection[0]):
+			selection.append(noble_dto)
+	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
+		if can_purchase_noble(noble_dto, selection[1]):
+			selection.append(noble_dto)
+
+func can_purchase_noble(noble_dto: Noble, card_dto: CardDTO):
+	var player_state: PlayerState = game_state.player_states[host_player.id]
+	return player_state.can_purchase_noble(noble_dto, card_dto)
 		
 func update_board():
 	var player_states = game_state.player_states
@@ -272,6 +293,19 @@ func update_board():
 			reserved_card_scene.visible = true
 		else:
 			reserved_card_scene.visible = false
+		i += 1
+	
+	i = 0
+	for noble_card in nobles_node.get_children():
+		var noble_card_scene = noble_card
+		if i < len(game_state.deck.noble_cards):
+			var noble_dto = Noble.new()
+			noble_dto.init_from_json(game_state.deck.noble_cards[i])
+			noble_card_scene.init_from_json(noble_dto)
+			noble_card_scene.connect("clicked_card", self, "received_noble_click")
+			noble_card_scene.visible = true
+		else:
+			noble_card_scene.visible = false
 		i += 1
 		
 	
@@ -437,24 +471,30 @@ func _on_EndTurn_pressed():
 	# room_id, player_id, game_state_id, end_turn_action, noble: Noble,
 	# card: Card, reserved_card: Card, tokens_returned: Array, tokens_bought: Array
 	if current_game_state == GameState.CARD_SELECTED:
+		var selected_noble = null
+		if len(selection) == 2:
+			selected_noble = selection[1]
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
 			game_state.id,
 			EndTurnAction.BuyingCard,
-			null,
+			selected_noble,
 			selection[0],
 			null,
 			selection[0].get_tokens_returned(),
 			[]
 		)
 	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
+		var selected_noble = null
+		if len(selection) == 2:
+			selected_noble = selection[1]
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
 			game_state.id,
 			EndTurnAction.BuyingReservedCard,
-			null,
+			selected_noble,
 			selection[0],
 			null,
 			selection[0].get_tokens_returned(),

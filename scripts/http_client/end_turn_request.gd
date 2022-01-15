@@ -34,13 +34,16 @@ func end_turn(room_id, player_id, game_state_id, end_turn_action, noble: Noble, 
 	var reserved_card_data = null
 	if reserved_card != null:
 		reserved_card_data = reserved_card.get_as_json()
+	var reserved_noble_data = null
+	if noble != null:
+		reserved_noble_data = noble.get_as_json()
 	var payload = {
 			"room_id": room_id,
 			"player_id": player_id,
 			"game_state_id": game_state_id,
 			"action": end_turn_action,
 			"payload": {
-				"bought_noble": noble,
+				"bought_noble": reserved_noble_data,
 				"bought_card": card_data,
 				"reserved_card": reserved_card_data,
 				"tokens_returned": tokens_returned,
