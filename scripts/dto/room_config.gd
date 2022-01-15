@@ -13,7 +13,7 @@ func _init(host_player_id):
 	min_players = 2
 	max_players = 4
 	creator_id = host_player_id
-	score_to_win = 2
+	score_to_win = 15
 
 func to_json():
 	return {
