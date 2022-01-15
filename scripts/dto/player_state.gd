@@ -6,6 +6,16 @@ var reserved_cards: Array
 var nobles: Array
 var data
 
+func get_total_points():
+	var points = 0
+	for card_color in cards:
+		var cards_list = cards[card_color]
+		for card in cards_list:
+			points += int(card['points'])
+	for noble in nobles:
+		points += int(noble['points'])
+	return points
+
 func init_from_json(data):
 	self.data = data
 	cards = data['cards']

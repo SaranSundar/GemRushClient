@@ -3,11 +3,14 @@ class_name PlayerStats extends Node2D
 var player_id_label: Label
 var player_state: PlayerState
 
+var points: Sprite
+
 var gems: Array = []
 var token_colors: Array = []
 
 func init(player_id: String, player_state: PlayerState):
 	player_id_label = $PlayerId
+	points = $points
 	gems = [$GoldGem, $BlueGem, $BlackGem, $RedGem, $GreenGem, $WhiteGem]
 	token_colors = [TokenColor.GOLD, TokenColor.BLUE, TokenColor.BLACK, TokenColor.RED,
 	TokenColor.GREEN, TokenColor.WHITE]
@@ -17,6 +20,10 @@ func init(player_id: String, player_state: PlayerState):
 
 func update_tokens(player_state: PlayerState):
 	self.player_state = player_state
+	var total_points = player_state.get_total_points()
+	points.visible = total_points > 0
+	if total_points > 0:
+		points.texture = load("res://assets/card/big_" + str(total_points) + ".png")
 	for i in range(0, len(token_colors)):
 		var num_tokens_owned: int = player_state.tokens[token_colors[i]]
 		gems[i].get_node("small").visible = num_tokens_owned > 0

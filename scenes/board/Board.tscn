@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -124,6 +124,12 @@ extents = Vector2( 27.875, 23.5 )
 
 [sub_resource type="DynamicFont" id=26]
 size = 42
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=37]
+size = 100
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 7 )
 
 [node name="Board" type="Node2D"]
@@ -318,6 +324,7 @@ position = Vector2( -85, 37 )
 texture = SubResource( 2 )
 
 [node name="Deck" type="Node2D" parent="."]
+position = Vector2( 125, 0 )
 
 [node name="BLUE" type="Node2D" parent="Deck"]
 
@@ -456,15 +463,32 @@ __meta__ = {
 }
 
 [node name="ReservedCards" type="Node2D" parent="."]
-position = Vector2( 1130, 0 )
+position = Vector2( 1149, 0 )
 
 [node name="Card" parent="ReservedCards" instance=ExtResource( 1 )]
-position = Vector2( 200, 250 )
+position = Vector2( 227, 250 )
 
 [node name="Card2" parent="ReservedCards" instance=ExtResource( 1 )]
-position = Vector2( 200, 0 )
+position = Vector2( 227, 0 )
 
 [node name="Card3" parent="ReservedCards" instance=ExtResource( 1 )]
-position = Vector2( 400, 0 )
+position = Vector2( 397, 0 )
+
+[node name="Winners" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Winners"]
+margin_left = 394.0
+margin_top = 42.0
+margin_right = 1454.0
+margin_bottom = 206.0
+custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
+custom_fonts/font = SubResource( 37 )
+text = "Winners Are: Saran!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]

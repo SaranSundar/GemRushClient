@@ -28,6 +28,11 @@ font_data = ExtResource( 19 )
 position = Vector2( 18, 10 )
 script = ExtResource( 18 )
 
+[node name="points" type="Sprite" parent="."]
+position = Vector2( 459, 102 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
 [node name="Border" type="Sprite" parent="."]
 position = Vector2( 194, 103 )
 scale = Vector2( 0.344167, 0.245417 )

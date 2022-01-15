@@ -14,6 +14,7 @@ var selection_node: Node2D
 var http_client: HttpRequestClient
 var end_turn_button: Button
 var reserved_cards_node: Node2D
+var winners_label: Label
 
 var start_time = OS.get_ticks_msec()
 
@@ -39,6 +40,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	deck = $Deck
 	selection_node = $Selection
 	reserved_cards_node = $ReservedCards
+	winners_label = $Winners/Label
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
@@ -47,6 +49,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	update_bank()
 	update_player_inventory()
 	update_board()
+	display_winners()
 	start_time = OS.get_ticks_msec()
 
 func game_state_received(game_state_dto):
@@ -61,7 +64,17 @@ func game_state_received(game_state_dto):
 	print("Game player id " + str(game_player_id))
 	print("Current player id " + str(host_player.id))
 	update_board()
+	display_winners()
 	start_time = OS.get_ticks_msec()
+
+func display_winners():
+	var winners_text = ""
+	for winner in game_state.winners:
+		winners_text += winner[2]
+		if len(game_state.winners) > 1:
+			winners_text += ", "
+	winners_label.text = winners_text
+	winners_label.visible = len(game_state.winners) >= 1
 
 
 func update_game_state():
