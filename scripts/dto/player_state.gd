@@ -21,7 +21,7 @@ func can_purchase_noble(noble_dto: Noble, card: CardDTO):
 		if noble_dto.cost[card_color] == 0:
 			continue
 		var cards_owned = get_card_count(card_color)
-		if card.color == card_color:
+		if card != null && card.color == card_color:
 			cards_owned += 1
 		if cards_owned < noble_dto.cost[card_color]:
 			return false

@@ -133,6 +133,8 @@ func update_selection():
 			token_node.visible = false
 			cancel_node.visible = false
 			if i - 1 < len(selection):
+				if selection[i-1] is Noble:
+					continue
 				var token_color: String = selection[i-1]
 				token_node.visible = true
 				cancel_node.visible = true
@@ -155,9 +157,14 @@ func update_selection():
 		cancel_node.visible = true
 		card_node.init_from_json(selection[0])
 		card_node.visible = true
-		if len(selection) == 2:
-			noble_node.init_from_json(selection[1])
-			noble_node.visible = true
+	
+	var selected_noble = null
+	for option in selection:
+		if option is Noble:
+			selected_noble = option
+	if selected_noble != null:
+		noble_node.init_from_json(selected_noble)
+		noble_node.visible = true
 			
 	
 
@@ -208,6 +215,13 @@ func received_cancel_click(selection_index_str):
 	elif current_game_state == GameState.TOKENS_SELECTED:
 		bank[selection[selection_index]] += 1
 		selection.remove(selection_index)
+		var noble_index = -1
+		for i in range(len(selection)):
+			if selection[i] is Noble:
+				noble_index = i
+				break
+		if noble_index != -1:
+			selection.remove(noble_index)
 	elif current_game_state == GameState.CARD_SELECTED:
 		selection = []
 	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
@@ -248,12 +262,17 @@ func received_card_click(card_dto: CardDTO):
 func received_noble_click(noble_dto: Noble):
 	print(noble_dto.cost)
 	print(noble_dto.points)
-	if current_game_state == GameState.CARD_SELECTED:
+	if current_game_state == GameState.CARD_SELECTED or current_game_state == GameState.RESERVED_CARD_SELECTED:
 		if can_purchase_noble(noble_dto, selection[0]):
 			selection.append(noble_dto)
-	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
-		if can_purchase_noble(noble_dto, selection[1]):
+	elif current_game_state == GameState.TOKENS_SELECTED:
+		if can_purchase_noble(noble_dto, null):
 			selection.append(noble_dto)
+	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
+		# Gold token and reserved card selected
+		if len(selection) == 2:
+			if can_purchase_noble(noble_dto, null):
+				selection.append(noble_dto)
 
 func can_purchase_noble(noble_dto: Noble, card_dto: CardDTO):
 	var player_state: PlayerState = game_state.player_states[host_player.id]
@@ -291,6 +310,7 @@ func update_board():
 			card_dto.init_from_json(player_state.reserved_cards[i])
 			reserved_card_scene.init_from_json(card_dto)
 			reserved_card_scene.connect("clicked_card", self, "received_reserved_card_click")
+			reserved_card_scene.update_card_shader(can_purchase_card(card_dto, player_state))
 			reserved_card_scene.visible = true
 		else:
 			reserved_card_scene.visible = false
@@ -451,12 +471,18 @@ func update_player_stats():
 	
 
 func _on_EndTurn_pressed():
+	var selected_noble = null
+	var noble_index = -1
+	for i in range(len(selection)):
+		if selection[i] is Noble:
+			noble_index = i
+			break
+	if noble_index != -1:
+		selected_noble = selection[noble_index]
+		selection.remove(noble_index)
 	# room_id, player_id, game_state_id, end_turn_action, noble: Noble,
 	# card: Card, reserved_card: Card, tokens_returned: Array, tokens_bought: Array
 	if current_game_state == GameState.CARD_SELECTED:
-		var selected_noble = null
-		if len(selection) == 2:
-			selected_noble = selection[1]
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
@@ -469,9 +495,6 @@ func _on_EndTurn_pressed():
 			[]
 		)
 	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
-		var selected_noble = null
-		if len(selection) == 2:
-			selected_noble = selection[1]
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
@@ -490,7 +513,7 @@ func _on_EndTurn_pressed():
 				host_player.id,
 				game_state.id,
 				EndTurnAction.BuyingGoldToken,
-				null,
+				selected_noble,
 				null,
 				selection[1],
 				[],
@@ -502,7 +525,7 @@ func _on_EndTurn_pressed():
 			host_player.id,
 			game_state.id,
 			EndTurnAction.Buying3DifferentTokens,
-			null,
+			selected_noble,
 			null,
 			null,
 			[],
