@@ -279,6 +279,7 @@ func update_board():
 			card_scene.connect("clicked_card", self, "received_card_click")
 			card_scene.position.x = (i * x_spacing) + offset_x
 			card_scene.position.y = (r * y_spacing) + offset_y
+			card_scene.update_card_shader(can_purchase_card(card_dto, player_state))
 			deck_tier.add_child(card_scene)
 			i += 1
 		r += 1
@@ -307,24 +308,6 @@ func update_board():
 		else:
 			noble_card_scene.visible = false
 		i += 1
-		
-	
-
-func update_valid_selections():
-	var player_states = game_state.player_states
-	var player_state: PlayerState = player_states[host_player.id]
-	
-	var green_tier = deck.get_node("GreenTier")
-	var cannot_purchase_color = Color("FF9999")
-	var no_color = Color(1, 1, 1)
-	
-	for card_nodes in green_tier.get_children():
-		var card: Card = card_nodes
-		var card_dto: CardDTO = card.card_dto
-		if can_purchase_card(card_dto, player_state)['can_purchase']:
-			card.modulate = cannot_purchase_color
-		else:
-			card.modulate = no_color
 		
 	
 func can_purchase_token(selected_tokens, new_token, player_state: PlayerState):

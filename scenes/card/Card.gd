@@ -7,6 +7,8 @@ var base: Sprite
 var gem: Sprite
 var points: Sprite
 var costs: Array
+const SHADER = preload("res://assets/shader/card_shader.tres")
+const MATERIAL = preload("res://assets/shader/card_shader_material.tres")
 
 signal clicked_card(card_data)
 
@@ -14,6 +16,11 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		emit_signal("clicked_card", card_dto)
 
+func update_card_shader(show_outline):
+	if show_outline['can_purchase']:
+		base.material.set_shader_param("color", Plane(0.85,0.65,0.13,1))
+	else:
+		base.material.set_shader_param("color", Plane(0,0,0,1))
 
 func init_from_json(cardDTO: CardDTO):
 	card_dto = cardDTO
@@ -21,6 +28,9 @@ func init_from_json(cardDTO: CardDTO):
 	gem = $gem
 	points = $points
 	costs = [$cost1_base, $cost2_base, $cost3_base, $cost4_base]
+	var mat = MATERIAL.duplicate(true)
+	mat.set_shader(SHADER)
+	base.set_material(mat)
 	update_graphics()
 
 func update_graphics():
