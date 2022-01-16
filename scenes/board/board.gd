@@ -525,3 +525,18 @@ func _on_EndTurn_pressed():
 			[],
 			selection
 		)
+
+
+func _on_Discard_pressed():
+	if current_game_state != GameState.NOT_MY_TURN:
+		http_client.end_turn_request.end_turn(
+			room.id,
+			host_player.id,
+			game_state.id,
+			EndTurnAction.DiscardTokens,
+			null,
+			null,
+			null,
+			[],
+			[]
+		)

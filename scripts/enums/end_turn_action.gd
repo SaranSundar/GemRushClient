@@ -6,4 +6,5 @@ const BuyingGoldToken = 'BuyingGoldToken'
 const Buying3DifferentTokens = 'Buying3DifferentTokens'
 const Buying2SameTokens = 'Buying2SameTokens'
 const BuyingLimitedTokens = 'BuyingLimitedTokens'
+const DiscardTokens = 'DiscardTokens'
 

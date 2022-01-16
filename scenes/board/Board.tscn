@@ -466,6 +466,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Discard" type="Button" parent="Control"]
+margin_left = 1690.0
+margin_top = 948.0
+margin_right = 1917.0
+margin_bottom = 1056.0
+custom_fonts/font = SubResource( 26 )
+text = "Discard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ReservedCards" type="Node2D" parent="."]
 position = Vector2( 1149, 0 )
 
@@ -508,3 +519,4 @@ position = Vector2( 150, 85 )
 position = Vector2( 145, -112 )
 
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
+[connection signal="pressed" from="Control/Discard" to="." method="_on_Discard_pressed"]
