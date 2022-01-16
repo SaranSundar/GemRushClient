@@ -16,6 +16,7 @@ var end_turn_button: Button
 var reserved_cards_node: Node2D
 var winners_label: Label
 var nobles_node: Node2D
+var particles_node: Node2D
 
 var start_time = OS.get_ticks_msec()
 
@@ -43,6 +44,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	reserved_cards_node = $ReservedCards
 	winners_label = $Winners/Label
 	nobles_node = $Nobles
+	particles_node = $Particles
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
@@ -65,6 +67,8 @@ func game_state_received(game_state_dto):
 	var game_player_id = game_state.turn_order[game_state.turn_number].id
 	print("Game player id " + str(game_player_id))
 	print("Current player id " + str(host_player.id))
+	if game_state.turn_order[game_state.turn_number].id == host_player.id:
+		display_particles()
 	update_board()
 	display_winners()
 	start_time = OS.get_ticks_msec()
@@ -77,6 +81,13 @@ func display_winners():
 			winners_text += ", "
 	winners_label.text = winners_text
 	winners_label.visible = len(game_state.winners) >= 1
+
+func display_particles():
+	particles_node.visible = true
+	for node in particles_node.get_children():
+		var particle: Particles2D = node
+		particle.set_emitting(true)
+		particle.visible = true
 
 
 func update_game_state():

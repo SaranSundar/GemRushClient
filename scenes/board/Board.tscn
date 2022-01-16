@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -132,6 +132,21 @@ size = 100
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=38]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 50.0
+gravity = Vector3( 0, 60, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 0.5
+color = Color( 1, 0, 0, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 2 )
@@ -435,7 +450,7 @@ texture = ExtResource( 3 )
 position = Vector2( 131, 434 )
 
 [node name="noble" parent="Selection" instance=ExtResource( 8 )]
-position = Vector2( 304, 450 )
+position = Vector2( 303, 430 )
 
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
 position = Vector2( 0, 24 )
@@ -517,6 +532,62 @@ position = Vector2( 150, 85 )
 
 [node name="Noble3" parent="Nobles" instance=ExtResource( 8 )]
 position = Vector2( 145, -112 )
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="Particles"]
+position = Vector2( 1029, 419 )
+emitting = false
+amount = 50
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
+
+[node name="Particles2D2" type="Particles2D" parent="Particles"]
+position = Vector2( 1538, 188 )
+emitting = false
+amount = 50
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
+
+[node name="Particles2D3" type="Particles2D" parent="Particles"]
+position = Vector2( 561, 190 )
+emitting = false
+amount = 50
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
+
+[node name="Particles2D4" type="Particles2D" parent="Particles"]
+position = Vector2( 419, 861 )
+emitting = false
+amount = 50
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
+
+[node name="Particles2D5" type="Particles2D" parent="Particles"]
+position = Vector2( 1580, 910 )
+emitting = false
+amount = 50
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
+
+[node name="Particles2D6" type="Particles2D" parent="Particles"]
+position = Vector2( 1072, 810 )
+emitting = false
+amount = 50
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 38 )
 
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
 [connection signal="pressed" from="Control/Discard" to="." method="_on_Discard_pressed"]
