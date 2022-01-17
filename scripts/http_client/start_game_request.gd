@@ -1,7 +1,7 @@
 class_name StartGameRequest extends HTTPRequest
 
-const host_ip: String = "http://207.246.122.46"
-const port: String = "9378"
+const host_ip: String = "https://207.246.122.46"
+const port: String = "443"
 
 signal game_state_created(game_state_dto)
 
@@ -14,7 +14,7 @@ func make_post_request(url, data_to_send, use_ssl):
 	var query = JSON.print(data_to_send)
 	# Add 'Content-Type' header:
 	var headers = ["Content-Type: application/json"]
-	self.request(url, headers, true, HTTPClient.METHOD_POST, query)
+	self.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())

@@ -1,7 +1,7 @@
 class_name GetRoomRequest extends HTTPRequest
 
-const host_ip: String = "http://207.246.122.46"
-const port: String = "9378"
+const host_ip: String = "https://207.246.122.46"
+const port: String = "443"
 
 signal room_created(room_dto)
 
@@ -12,7 +12,7 @@ func _ready():
 func make_get_request(url):
 	# Add 'Content-Type' header:
 	var headers = ["Content-Type: application/json"]
-	self.request(url, headers, true, HTTPClient.METHOD_GET)
+	self.request(url, headers, false, HTTPClient.METHOD_GET)
 
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
