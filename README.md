@@ -1,3 +1,4 @@
 # GemRushClient
 
-https://saransundar.github.io/GemRushClient/
+http://gem-rush.surge.sh/
+

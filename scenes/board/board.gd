@@ -19,6 +19,7 @@ var nobles_node: Node2D
 var particles_node: Node2D
 var discard_button: Button
 
+var timer_checkout_ms = 7000
 
 var start_time = OS.get_ticks_msec()
 
@@ -126,7 +127,7 @@ func _process(delta):
 	
 	if current_game_state == GameState.NOT_MY_TURN:
 		var elapsed_time = OS.get_ticks_msec() - start_time
-		if elapsed_time > 10000:
+		if elapsed_time > timer_checkout_ms:
 			_on_Timer_timeout()
 			start_time = OS.get_ticks_msec()
 
@@ -194,6 +195,12 @@ func setup_clickable_sprites():
 	$Bank/GreenTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
 	$Bank/BlueTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
 	$Bank/WhiteTokens/Area2D.connect("clicked_sprite", self, "received_tokens_click")
+	
+	for noble in $Nobles.get_children():
+		noble.connect("clicked_card", self, "received_noble_click")
+	
+	for reserved_c in $ReservedCards.get_children():
+		reserved_c.connect("clicked_card", self, "received_reserved_card_click")
 
 func received_tokens_click(sprite_name):
 	print("CGS before: " + str(current_game_state))
@@ -325,7 +332,6 @@ func update_board():
 			var card_dto = CardDTO.new()
 			card_dto.init_from_json(player_state.reserved_cards[i])
 			reserved_card_scene.init_from_json(card_dto)
-			reserved_card_scene.connect("clicked_card", self, "received_reserved_card_click")
 			reserved_card_scene.update_card_shader(can_purchase_card(card_dto, player_state))
 			reserved_card_scene.visible = true
 		else:
@@ -339,7 +345,6 @@ func update_board():
 			var noble_dto = Noble.new()
 			noble_dto.init_from_json(game_state.deck.noble_cards[i])
 			noble_card_scene.init_from_json(noble_dto)
-			noble_card_scene.connect("clicked_card", self, "received_noble_click")
 			noble_card_scene.visible = true
 		else:
 			noble_card_scene.visible = false
