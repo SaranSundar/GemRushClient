@@ -500,6 +500,7 @@ func _on_EndTurn_pressed():
 	# card: Card, reserved_card: Card, tokens_returned: Array, tokens_bought: Array
 	if current_game_state == GameState.CARD_SELECTED:
 		end_turn_button.visible = false
+		discard_button.visible = false
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
@@ -513,6 +514,7 @@ func _on_EndTurn_pressed():
 		)
 	elif current_game_state == GameState.RESERVED_CARD_SELECTED:
 		end_turn_button.visible = false
+		discard_button.visible = false
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
@@ -526,6 +528,7 @@ func _on_EndTurn_pressed():
 		)
 	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
 		end_turn_button.visible = false
+		discard_button.visible = false
 		if len(selection) == 2:
 			http_client.end_turn_request.end_turn(
 				room.id,
@@ -540,6 +543,7 @@ func _on_EndTurn_pressed():
 			)
 	elif current_game_state == GameState.TOKENS_SELECTED:
 		end_turn_button.visible = false
+		discard_button.visible = false
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
@@ -556,6 +560,7 @@ func _on_EndTurn_pressed():
 func _on_Discard_pressed():
 	if current_game_state != GameState.NOT_MY_TURN:
 		discard_button.visible = false
+		end_turn_button.visible = false
 		http_client.end_turn_request.end_turn(
 			room.id,
 			host_player.id,
