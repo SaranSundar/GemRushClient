@@ -11,10 +11,7 @@ const uuid_util = preload('res://scripts/uuid/uuid.gd')
 func _ready():
 	Constants.root = self
 	# Will create player id and show ui to create or join game
-	var uid: String = OS.get_unique_id()
-	if uid == "":
-		uid = uuid_util.v4()
-	uid = uuid_util.v4()
+	var uid = uuid_util.v4()
 	host_player = Player.new(uid)
 	menu_handler = MenuHandler.new()
 	var create_or_join_room_menu = CreateOrJoinRoomMenuScene.instance()

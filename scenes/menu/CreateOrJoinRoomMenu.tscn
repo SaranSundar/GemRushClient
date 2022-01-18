@@ -93,5 +93,25 @@ margin_bottom = 193.0
 custom_fonts/font = SubResource( 5 )
 placeholder_text = "Enter Username Here"
 
+[node name="WebUsernameButton" type="TextureButton" parent="Panel"]
+margin_left = 39.0
+margin_top = 100.0
+margin_right = 453.0
+margin_bottom = 190.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WebRoomCodeButton" type="TextureButton" parent="Panel"]
+margin_left = 34.0
+margin_top = 206.0
+margin_right = 457.0
+margin_bottom = 299.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Panel/JoinRoom" to="." method="_on_JoinRoom_pressed"]
 [connection signal="pressed" from="Panel/CreateRoom" to="." method="_on_CreateRoom_pressed"]
+[connection signal="pressed" from="Panel/WebUsernameButton" to="." method="_on_WebUsernameButton_pressed"]
+[connection signal="pressed" from="Panel/WebRoomCodeButton" to="." method="_on_WebRoomCodeButton_pressed"]
