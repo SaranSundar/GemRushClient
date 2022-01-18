@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enums/api_methods.gd"
 }, {
+"base": "HTTPRequest",
+"class": "BaseHTTPRequest",
+"language": "GDScript",
+"path": "res://scripts/http_client/base_http_request.gd"
+}, {
 "base": "Node2D",
 "class": "Board",
 "language": "GDScript",
@@ -49,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/create_room_lobby.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "CreateRoomRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/create_room_request.gd"
@@ -64,7 +69,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enums/end_turn_action.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "EndTurnRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/end_turn_request.gd"
@@ -74,12 +79,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dto/game_state.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "GetGameStateRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/get_game_state_request.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "GetRoomRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/get_room_request.gd"
@@ -89,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/http_client/http_request_client.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "JoinRoomRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/join_room_request.gd"
@@ -139,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dto/room.gd"
 }, {
-"base": "HTTPRequest",
+"base": "BaseHTTPRequest",
 "class": "StartGameRequest",
 "language": "GDScript",
 "path": "res://scripts/http_client/start_game_request.gd"
@@ -156,6 +161,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ApiMethods": "",
+"BaseHTTPRequest": "",
 "Board": "",
 "Card": "",
 "CardColor": "",

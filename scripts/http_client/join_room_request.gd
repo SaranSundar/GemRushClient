@@ -1,7 +1,5 @@
-class_name JoinRoomRequest extends HTTPRequest
+class_name JoinRoomRequest extends BaseHTTPRequest
 
-const host_ip: String = "http://207.246.122.46"
-const port: String = "9378"
 
 signal room_created(room_dto)
 

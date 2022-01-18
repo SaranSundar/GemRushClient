@@ -1,7 +1,5 @@
-class_name EndTurnRequest extends HTTPRequest
+class_name EndTurnRequest extends BaseHTTPRequest
 
-const host_ip: String = "http://207.246.122.46"
-const port: String = "9378"
 
 signal game_state_created(game_state_dto)
 
