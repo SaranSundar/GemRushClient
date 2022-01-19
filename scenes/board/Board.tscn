@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/noble/Noble.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/utils/clickable_sprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
+[ext_resource path="res://scenes/rules/Rules.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
 [ext_resource path="res://scenes/board/PlayerStats.tscn" type="PackedScene" id=26]
@@ -481,6 +482,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Rules" type="Button" parent="Control"]
+margin_left = 1719.0
+margin_top = 2.0
+margin_right = 1918.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 26 )
+text = "Rules"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Discard" type="Button" parent="Control"]
 margin_left = 1690.0
 margin_top = 948.0
@@ -589,5 +601,12 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 38 )
 
+[node name="Rules" parent="." instance=ExtResource( 11 )]
+margin_left = -39.0
+margin_top = 27.0
+margin_right = -39.0
+margin_bottom = 27.0
+
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
+[connection signal="pressed" from="Control/Rules" to="." method="_on_Rules_pressed"]
 [connection signal="pressed" from="Control/Discard" to="." method="_on_Discard_pressed"]

@@ -20,9 +20,10 @@ func _on_request_completed(result, response_code, headers, body):
 	print(headers)
 	print(result)
 	print(response_code)
-	var room_dto = RoomDTO.new()
-	room_dto.init_from_json(json.result)
-	emit_signal("room_created", room_dto)
+	if json.result != null:
+		var room_dto = RoomDTO.new()
+		room_dto.init_from_json(json.result)
+		emit_signal("room_created", room_dto)
 
 func join_room(player_id: String, name, password, room_id):
 	var join_room_url = self.host_ip + ":" + self.port + ApiMethods.JOIN_ROOM + "/" + room_id

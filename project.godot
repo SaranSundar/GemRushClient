@@ -144,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/dto/room.gd"
 }, {
+"base": "Control",
+"class": "Rules",
+"language": "GDScript",
+"path": "res://scenes/rules/rules.gd"
+}, {
 "base": "BaseHTTPRequest",
 "class": "StartGameRequest",
 "language": "GDScript",
@@ -187,6 +192,7 @@ _global_script_class_icons={
 "PlayerStats": "",
 "RoomConfig": "",
 "RoomDTO": "",
+"Rules": "",
 "StartGameRequest": "",
 "Tier": "",
 "TokenColor": ""

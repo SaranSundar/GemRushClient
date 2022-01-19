@@ -1,0 +1,169 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/fonts/dreamwood-font.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/card/gold_token.png" type="Texture" id=3]
+[ext_resource path="res://assets/card/white_token.png" type="Texture" id=4]
+[ext_resource path="res://scenes/noble/Noble.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/card/green_token.png" type="Texture" id=6]
+[ext_resource path="res://assets/card/blue_token.png" type="Texture" id=7]
+[ext_resource path="res://assets/card/red_token.png" type="Texture" id=8]
+[ext_resource path="res://assets/card/cancel.png" type="Texture" id=9]
+[ext_resource path="res://scenes/rules/rules.gd" type="Script" id=10]
+[ext_resource path="res://assets/fonts/DroidSans.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://assets/fonts/wonderbar.otf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = SubResource( 3 )
+
+[node name="Rules" type="Control"]
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 124.0
+margin_top = 58.0
+margin_right = 1884.0
+margin_bottom = 1039.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomMenuLabel" type="Label" parent="Panel"]
+margin_left = 713.0
+margin_top = 38.0
+margin_right = 922.0
+margin_bottom = 138.0
+custom_fonts/font = SubResource( 1 )
+text = "Rules"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomMenuLabel2" type="Label" parent="Panel"]
+margin_left = 314.0
+margin_top = 177.0
+margin_right = 1226.0
+margin_bottom = 277.0
+custom_fonts/font = SubResource( 1 )
+text = "Choose Card or Tokens"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomMenuLabel3" type="Label" parent="Panel"]
+margin_left = 50.0
+margin_top = 291.0
+margin_right = 780.0
+margin_bottom = 598.0
+custom_fonts/font = SubResource( 2 )
+text = "Card has points on top left, and cost in number of tokens on bottom left. Each card is a permanent token of its gem color. This card is a blue token."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomMenuLabel4" type="Label" parent="Panel"]
+margin_left = 1020.0
+margin_top = 304.0
+margin_right = 1752.0
+margin_bottom = 611.0
+custom_fonts/font = SubResource( 2 )
+text = "A noble can be bought with the required amount of cards for the color and not with tokens. Bought on same turn you meet the requirements."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Card" parent="Panel" instance=ExtResource( 2 )]
+position = Vector2( 794, 320 )
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 71.0
+margin_top = 609.0
+margin_right = 713.0
+margin_bottom = 680.0
+custom_fonts/font = SubResource( 4 )
+text = "3 Tokens of a different color"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel"]
+margin_left = 50.0
+margin_top = 808.0
+margin_right = 692.0
+margin_bottom = 879.0
+custom_fonts/font = SubResource( 4 )
+text = "2 Tokens of the same color"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Panel"]
+margin_left = 780.0
+margin_top = 659.0
+margin_right = 1503.0
+margin_bottom = 936.0
+custom_fonts/font = SubResource( 4 )
+text = "1 Gold Token Lets you reserve a card and counts as any color token"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoldToken" type="Sprite" parent="Panel/Label3"]
+position = Vector2( 240, 220 )
+texture = ExtResource( 3 )
+
+[node name="Noble" parent="Panel" instance=ExtResource( 5 )]
+position = Vector2( 1552, 100 )
+
+[node name="BlueToken" type="Sprite" parent="."]
+position = Vector2( 374, 793 )
+texture = ExtResource( 7 )
+
+[node name="GreenToken" type="Sprite" parent="."]
+position = Vector2( 495, 792 )
+texture = ExtResource( 6 )
+
+[node name="RedToken" type="Sprite" parent="."]
+position = Vector2( 625, 794 )
+texture = ExtResource( 8 )
+
+[node name="WhiteToken" type="Sprite" parent="."]
+position = Vector2( 361, 974 )
+texture = ExtResource( 4 )
+
+[node name="WhiteToken2" type="Sprite" parent="."]
+position = Vector2( 480, 978 )
+texture = ExtResource( 4 )
+
+[node name="Cancel" type="Sprite" parent="."]
+position = Vector2( 1771, 927 )
+scale = Vector2( 0.395833, 0.364583 )
+texture = ExtResource( 9 )
+
+[node name="TextureButton" type="TextureButton" parent="Cancel"]
+margin_left = -207.0
+margin_top = -206.0
+margin_right = 207.0
+margin_bottom = 211.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Cancel/TextureButton" to="." method="_on_TextureButton_pressed"]

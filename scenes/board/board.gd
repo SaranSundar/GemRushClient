@@ -18,6 +18,7 @@ var winners_label: Label
 var nobles_node: Node2D
 var particles_node: Node2D
 var discard_button: Button
+var rules_scene: Rules
 
 var timer_checkout_ms = 7000
 
@@ -49,6 +50,8 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	winners_label = $Winners/Label
 	nobles_node = $Nobles
 	particles_node = $Particles
+	rules_scene = $Rules
+	rules_scene.visible = false
 	http_client = HttpRequestClient.new()
 	add_child(http_client)
 	http_client.connect_game_state_created_to_game_state_received(self)
@@ -59,6 +62,10 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	update_board()
 	display_winners()
 	start_time = OS.get_ticks_msec()
+
+func close_rules():
+	print("Cancel received")
+	rules_scene.visible = false
 
 func game_state_received(game_state_dto):
 	print("Game State received")
@@ -201,6 +208,8 @@ func setup_clickable_sprites():
 	
 	for reserved_c in $ReservedCards.get_children():
 		reserved_c.connect("clicked_card", self, "received_reserved_card_click")
+	
+	$Rules.connect("clicked_cancel", self, "close_rules")
 
 func received_tokens_click(sprite_name):
 	print("CGS before: " + str(current_game_state))
@@ -577,3 +586,7 @@ func _on_Discard_pressed():
 			[],
 			[]
 		)
+
+
+func _on_Rules_pressed():
+	rules_scene.visible = true
