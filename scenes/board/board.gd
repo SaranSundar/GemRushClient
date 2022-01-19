@@ -85,11 +85,12 @@ func game_state_received(game_state_dto):
 	start_time = OS.get_ticks_msec()
 
 func display_winners():
-	var winners_text = "Winners are: "
+	var winners_text = "Winner is: "
 	for winner in game_state.winners:
 		winners_text += winner
 		if len(game_state.winners) > 1:
 			winners_text += ", "
+	winners_label.text += "!"
 	winners_label.text = winners_text
 	winners_label.visible = len(game_state.winners) >= 1
 
