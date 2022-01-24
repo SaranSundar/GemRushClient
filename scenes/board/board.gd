@@ -112,7 +112,10 @@ func update_game_state():
 		if game_state.turn_order[game_state.turn_number].id == host_player.id:
 			current_game_state = GameState.MY_TURN
 			end_turn_button.visible = true
-			discard_button.visible = true
+			var player_states = game_state.player_states
+			var player_state: PlayerState = player_states[host_player.id]
+			if player_state.get_token_count() >= 8:
+				discard_button.visible = true
 			start_time = OS.get_ticks_msec()
 	
 	if current_game_state != GameState.NOT_MY_TURN:
@@ -573,20 +576,23 @@ func _on_EndTurn_pressed():
 
 
 func _on_Discard_pressed():
-	if current_game_state != GameState.NOT_MY_TURN:
-		discard_button.visible = false
-		end_turn_button.visible = false
-		http_client.end_turn_request.end_turn(
-			room.id,
-			host_player.id,
-			game_state.id,
-			EndTurnAction.DiscardTokens,
-			null,
-			null,
-			null,
-			[],
-			[]
-		)
+	if current_game_state == GameState.MY_TURN:
+		var player_states = game_state.player_states
+		var player_state: PlayerState = player_states[host_player.id]
+		if player_state.get_token_count() >= 8:
+			discard_button.visible = false
+			end_turn_button.visible = false
+			http_client.end_turn_request.end_turn(
+				room.id,
+				host_player.id,
+				game_state.id,
+				EndTurnAction.DiscardTokens,
+				null,
+				null,
+				null,
+				[],
+				[]
+			)
 
 
 func _on_Rules_pressed():

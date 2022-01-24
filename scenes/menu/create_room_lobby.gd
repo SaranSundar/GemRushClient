@@ -38,7 +38,7 @@ func _on_Timer_timeout():
 
 func _process(delta):
 	var elapsed_time = OS.get_ticks_msec() - start_time
-	if elapsed_time > 10000:
+	if elapsed_time > 3000:
 		_on_Timer_timeout()
 		start_time = OS.get_ticks_msec()
 
