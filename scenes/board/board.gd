@@ -507,7 +507,7 @@ func update_player_stats():
 			player_stats.position.y = (i * y_offset) + off_set
 			var player_state: PlayerState = game_state.player_states[player.id]
 			player_stats.init(player.id, player_state)
-		i += 1
+			i += 1
 	
 
 func _on_EndTurn_pressed():
