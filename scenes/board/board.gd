@@ -494,13 +494,19 @@ func update_player_stats():
 	var y_offset = 300
 	var off_set = 18
 	var i = 0
+	var turn_order = game_state.turn_order
+	var map = {}
 	for p in room.players:
-		var player: Player = p
-		var player_stats: PlayerStats = PlayerStatsScene.instance()
-		player_stats_hud.add_child(player_stats)
-		player_stats.position.y = (i * y_offset) + off_set
-		var player_state: PlayerState = game_state.player_states[player.id]
-		player_stats.init(player.id, player_state)
+		map[p.id] = p
+	for p_json in turn_order:
+		var p_id = p_json["id"]
+		var player: Player = map[p_id]
+		if p_id != host_player.id:
+			var player_stats: PlayerStats = PlayerStatsScene.instance()
+			player_stats_hud.add_child(player_stats)
+			player_stats.position.y = (i * y_offset) + off_set
+			var player_state: PlayerState = game_state.player_states[player.id]
+			player_stats.init(player.id, player_state)
 		i += 1
 	
 
