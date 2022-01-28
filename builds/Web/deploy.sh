@@ -1,2 +1,2 @@
-surge --domain https://gem-rush.surge.sh
+surge --domain http://gem-rush.surge.sh
 
