@@ -4,11 +4,13 @@ signal clicked_hide_recent_move()
 
 var tokens: VBoxContainer
 var card: Card
+var nobles: Array
 
 
 func init_from_json(player_state: PlayerState):
 	tokens = $Panel/VBoxContainer
 	card = $Panel/Card
+	nobles = [$Panel/Noble, $Panel/Noble2, $Panel/Noble3]
 	
 	print("Last Move")
 	print(player_state.last_move)
@@ -16,7 +18,7 @@ func init_from_json(player_state: PlayerState):
 	var tokens_bought = last_move['tokens_bought']
 	var reserved_card = last_move['reserved_card']
 	var bought_card = last_move['bought_card']
-	var nobles = player_state.nobles
+	var player_nobles = player_state.nobles
 	
 	Constants.delete_children(tokens)
 	var i = 0.5
@@ -43,6 +45,18 @@ func init_from_json(player_state: PlayerState):
 		card_dto.init_from_json(bought_card)
 		card.init_from_json(card_dto)
 		card.update_card_shader({'can_purchase': false})
+	
+	for n in nobles:
+		n.visible = false
+	
+	i = 0
+	for n in player_nobles:
+		var r: NobleScene = nobles[i]
+		var noble_dto = Noble.new()
+		noble_dto.init_from_json(player_nobles[i])
+		r.init_from_json(noble_dto)
+		r.visible = true
+		i += 1
 
 
 func _on_TextureButton_pressed():
