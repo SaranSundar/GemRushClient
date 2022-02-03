@@ -2,7 +2,7 @@ class_name Board extends Node2D
 
 var room: RoomDTO
 var game_state: GameState
-var player_stats_hud: Node2D
+var player_stats_hud: VBoxContainer
 var PlayerStatsScene = preload("res://scenes/board/PlayerStats.tscn")
 var CardScene = preload("res://scenes/card/Card.tscn")
 var bank_node: Node2D
@@ -40,7 +40,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	self.game_state = game_state
 	self.host_player = host_player
 	bank_node = $Bank
-	player_stats_hud = $PlayerStatsHUD
+	player_stats_hud = $PlayerStatsHUD/ScrollContainer/VBoxContainer
 	player_inventory = $PlayerInventory
 	end_turn_button = $Control/EndTurn
 	discard_button = $Control/Discard

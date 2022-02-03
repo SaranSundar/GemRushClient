@@ -8,6 +8,7 @@ var points: Sprite
 var gems: Array = []
 var token_colors: Array = []
 
+
 func init(player_id: String, player_state: PlayerState):
 	player_id_label = $PlayerId
 	points = $points
@@ -46,3 +47,8 @@ func set_player_id(player_id: String):
 	if len(player_id) >= 10:
 		player_id = player_id.substr(0, 10)
 	player_id_label.text = player_id
+	
+
+
+func _on_Button_pressed():
+	print("X")

@@ -456,13 +456,32 @@ position = Vector2( 303, 430 )
 [node name="PlayerStatsHUD" type="Node2D" parent="."]
 position = Vector2( 0, 24 )
 
-[node name="Player1" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+[node name="ScrollContainer" type="ScrollContainer" parent="PlayerStatsHUD"]
+margin_right = 614.0
+margin_bottom = 511.0
+rect_min_size = Vector2( 400, 500 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Player2" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerStatsHUD/ScrollContainer"]
+margin_right = 630.0
+margin_bottom = 1500.0
+rect_min_size = Vector2( 630, 1500 )
+
+[node name="Player1" parent="PlayerStatsHUD/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
+
+[node name="Player2" parent="PlayerStatsHUD/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
 position = Vector2( 18, 275 )
 
-[node name="Player3" parent="PlayerStatsHUD" instance=ExtResource( 26 )]
+[node name="Player3" parent="PlayerStatsHUD/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
 position = Vector2( 18, 536 )
+
+[node name="Player4" parent="PlayerStatsHUD/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
+position = Vector2( 18, 800 )
+
+[node name="Player5" parent="PlayerStatsHUD/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
+position = Vector2( 18, 1060 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -602,6 +621,7 @@ explosiveness = 1.0
 process_material = SubResource( 38 )
 
 [node name="Rules" parent="." instance=ExtResource( 11 )]
+visible = false
 margin_left = -39.0
 margin_top = 27.0
 margin_right = -39.0
