@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scenes/card/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/board/board.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/utils/clickable_sprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/card/small_3.png" type="Texture" id=10]
 [ext_resource path="res://scenes/rules/Rules.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/board/RecentMove.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/card/big_5.png" type="Texture" id=17]
 [ext_resource path="res://assets/card/black_card.png" type="Texture" id=23]
 [ext_resource path="res://scenes/board/PlayerStats.tscn" type="PackedScene" id=26]
@@ -453,13 +454,18 @@ position = Vector2( 131, 434 )
 [node name="noble" parent="Selection" instance=ExtResource( 8 )]
 position = Vector2( 303, 430 )
 
-[node name="PlayerStatsHUD" type="Node2D" parent="."]
-position = Vector2( 0, 24 )
+[node name="PlayerStatsHUD" type="Control" parent="."]
+rect_min_size = Vector2( 500, 500 )
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PlayerStatsHUD"]
 margin_right = 614.0
-margin_bottom = 511.0
+margin_bottom = 790.0
 rect_min_size = Vector2( 400, 500 )
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -626,6 +632,13 @@ margin_left = -39.0
 margin_top = 27.0
 margin_right = -39.0
 margin_bottom = 27.0
+
+[node name="RecentMove" parent="." instance=ExtResource( 12 )]
+visible = false
+margin_left = 543.0
+margin_top = 52.0
+margin_right = 543.0
+margin_bottom = 52.0
 
 [connection signal="pressed" from="Control/EndTurn" to="." method="_on_EndTurn_pressed"]
 [connection signal="pressed" from="Control/Rules" to="." method="_on_Rules_pressed"]

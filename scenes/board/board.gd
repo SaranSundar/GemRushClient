@@ -19,6 +19,7 @@ var nobles_node: Node2D
 var particles_node: Node2D
 var discard_button: Button
 var rules_scene: Rules
+var recent_move: RecentMove
 
 var timer_checkout_ms = 7000
 
@@ -39,6 +40,7 @@ func init(room: RoomDTO, game_state: GameState, host_player: Player):
 	self.room = room
 	self.game_state = game_state
 	self.host_player = host_player
+	recent_move = $RecentMove
 	bank_node = $Bank
 	player_stats_hud = $PlayerStatsHUD/ScrollContainer/VBoxContainer
 	player_inventory = $PlayerInventory
@@ -131,7 +133,7 @@ func _process(delta):
 	update_game_state()
 	update_selection()
 	
-	update_player_stats()
+	update_player_stats_without_delete()
 	update_bank()
 	update_player_inventory()
 	
@@ -490,6 +492,7 @@ func update_player_inventory():
 		i += 1
 
 func update_player_stats():
+	recent_move.connect("clicked_hide_recent_move", self, "hide_recent_move")
 	Constants.delete_children(player_stats_hud)
 	var y_offset = 300
 	var off_set = 18
@@ -506,10 +509,36 @@ func update_player_stats():
 		player_stats.position.y = (i * y_offset) + off_set
 		var player_state: PlayerState = game_state.player_states[player.id]
 		player_stats.init(player.id, player_state)
+		player_stats.connect("clicked_player_stats", self, "display_previous_move")
+		i += 1
+
+func hide_recent_move():
+	recent_move.visible = false
+
+func display_previous_move(player_id):
+	print("Received " + player_id)
+	var player_states = game_state.player_states
+	var player_state: PlayerState = player_states[player_id]
+	recent_move.init_from_json(player_state)
+	recent_move.visible = true
+
+func update_player_stats_without_delete():
+	var i = 0
+	var turn_order = game_state.turn_order
+	var map = {}
+	for p in room.players:
+		map[p.id] = p
+	for p_json in turn_order:
+		var p_id = p_json["id"]
+		var player: Player = map[p_id]
+		var player_stats: PlayerStats = player_stats_hud.get_child(i)
+		var player_state: PlayerState = game_state.player_states[player.id]
+		player_stats.init(player.id, player_state)
 		i += 1
 	
 
 func _on_EndTurn_pressed():
+	hide_recent_move()
 	var selected_noble = null
 	var noble_index = -1
 	for i in range(len(selection)):
@@ -581,6 +610,7 @@ func _on_EndTurn_pressed():
 
 
 func _on_Discard_pressed():
+	hide_recent_move()
 	if current_game_state == GameState.MY_TURN:
 		var player_states = game_state.player_states
 		var player_state: PlayerState = player_states[host_player.id]

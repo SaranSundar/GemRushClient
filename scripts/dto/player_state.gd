@@ -5,6 +5,7 @@ var tokens: Dictionary
 var reserved_cards: Array
 var nobles: Array
 var data
+var last_move: Dictionary
 
 func get_total_points():
 	var points = 0
@@ -42,6 +43,7 @@ func init_from_json(data):
 	tokens = data['tokens']
 	reserved_cards = data['reserved_cards']
 	nobles = data['nobles']
+	last_move = data['end_turn_request']
 
 func get_token_count():
 	var num_tokens = 0

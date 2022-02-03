@@ -8,10 +8,17 @@ var points: Sprite
 var gems: Array = []
 var token_colors: Array = []
 
+var button: Button
+
+var player_id
+
+signal clicked_player_stats(player_id)
+
 
 func init(player_id: String, player_state: PlayerState):
 	player_id_label = $PlayerId
 	points = $points
+	button = $Control/Button
 	gems = [$GoldGem, $BlueGem, $BlackGem, $RedGem, $GreenGem, $WhiteGem]
 	token_colors = [TokenColor.GOLD, TokenColor.BLUE, TokenColor.BLACK, TokenColor.RED,
 	TokenColor.GREEN, TokenColor.WHITE]
@@ -44,11 +51,11 @@ func update_tokens(player_state: PlayerState):
 		
 
 func set_player_id(player_id: String):
+	self.player_id = player_id
 	if len(player_id) >= 10:
 		player_id = player_id.substr(0, 10)
 	player_id_label.text = player_id
-	
 
 
 func _on_Button_pressed():
-	print("X")
+	emit_signal("clicked_player_stats", self.player_id)
