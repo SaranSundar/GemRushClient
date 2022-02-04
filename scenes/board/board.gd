@@ -508,7 +508,8 @@ func update_player_stats():
 		player_stats_hud.add_child(player_stats)
 		player_stats.position.y = (i * y_offset) + off_set
 		var player_state: PlayerState = game_state.player_states[player.id]
-		player_stats.init(player.id, player_state)
+		var show_turn = game_state.turn_order[game_state.turn_number].id == host_player.id
+		player_stats.init(player.id, player_state, show_turn)
 		player_stats.connect("clicked_player_stats", self, "display_previous_move")
 		i += 1
 
@@ -533,7 +534,8 @@ func update_player_stats_without_delete():
 		var player: Player = map[p_id]
 		var player_stats: PlayerStats = player_stats_hud.get_child(i)
 		var player_state: PlayerState = game_state.player_states[player.id]
-		player_stats.init(player.id, player_state)
+		var show_turn = game_state.turn_order[game_state.turn_number].id == host_player.id
+		player_stats.init(player.id, player_state, show_turn)
 		i += 1
 	
 
@@ -579,9 +581,9 @@ func _on_EndTurn_pressed():
 			[]
 		)
 	elif current_game_state == GameState.GOLD_TOKEN_SELECTED:
-		end_turn_button.visible = false
-		discard_button.visible = false
 		if len(selection) == 2:
+			end_turn_button.visible = false
+			discard_button.visible = false
 			http_client.end_turn_request.end_turn(
 				room.id,
 				host_player.id,

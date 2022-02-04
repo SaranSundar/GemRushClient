@@ -12,11 +12,15 @@ var button: Button
 
 var player_id
 
+var player_turn_sprite: Sprite
+
 signal clicked_player_stats(player_id)
 
 
-func init(player_id: String, player_state: PlayerState):
+func init(player_id: String, player_state: PlayerState, is_player_turn: bool):
 	player_id_label = $PlayerId
+	player_turn_sprite = $Cancel
+	player_turn_sprite.visible = is_player_turn
 	points = $points
 	button = $Control/Button
 	gems = [$GoldGem, $BlueGem, $BlackGem, $RedGem, $GreenGem, $WhiteGem]
