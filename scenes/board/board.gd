@@ -508,7 +508,7 @@ func update_player_stats():
 		player_stats_hud.add_child(player_stats)
 		player_stats.position.y = (i * y_offset) + off_set
 		var player_state: PlayerState = game_state.player_states[player.id]
-		var show_turn = game_state.turn_order[game_state.turn_number].id == host_player.id
+		var show_turn = game_state.turn_order[game_state.turn_number].id == p_id
 		player_stats.init(player.id, player_state, show_turn)
 		player_stats.connect("clicked_player_stats", self, "display_previous_move")
 		i += 1
@@ -534,7 +534,7 @@ func update_player_stats_without_delete():
 		var player: Player = map[p_id]
 		var player_stats: PlayerStats = player_stats_hud.get_child(i)
 		var player_state: PlayerState = game_state.player_states[player.id]
-		var show_turn = game_state.turn_order[game_state.turn_number].id == host_player.id
+		var show_turn = game_state.turn_order[game_state.turn_number].id == p_id
 		player_stats.init(player.id, player_state, show_turn)
 		i += 1
 	
